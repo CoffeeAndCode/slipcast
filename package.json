@@ -14,6 +14,10 @@
   },
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoffeeAndCode/static.git"
+  },
   "devDependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",
     "browser-sync": "^2.11.1",
