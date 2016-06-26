@@ -6,7 +6,7 @@ const mkdirp = require('mkdirp');
 const {readFile, writeFile} = require('fs');
 const {dirname} = require('path');
 
-const [nodePath, scriptPath, destinationFolder, sourceFolder, ...files] = process.argv;
+const [ , , destinationFolder, sourceFolder, ...files] = process.argv;
 files.forEach(processFile);
 
 function processFile(filename) {

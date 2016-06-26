@@ -2,7 +2,7 @@ const glob = require('glob');
 const {readFile, writeFile} = require('fs');
 const zlib = require('zlib');
 
-const [nodePath, scriptPath, sourceFolder] = process.argv;
+const [ , , sourceFolder] = process.argv;
 
 glob(`${sourceFolder}/**/*.{css,html,ico,jpg,jpeg,js,json,png,rss,xml}`, null, function (error, files) {
   if (error) { throw error; }

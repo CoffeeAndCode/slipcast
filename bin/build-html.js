@@ -1,6 +1,6 @@
 const Metalsmith = require('metalsmith');
 
-const [nodePath, scriptPath, destinationFolder] = process.argv;
+const [ , , destinationFolder] = process.argv;
 
 Metalsmith('app')
   .clean(false)
