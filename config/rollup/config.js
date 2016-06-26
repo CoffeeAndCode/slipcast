@@ -3,7 +3,7 @@ const commonjs = require('rollup-plugin-commonjs');
 const nodeResolve = require('rollup-plugin-node-resolve');
 
 module.exports = {
-  entry: 'app/frontend/app.js',
+  entry: 'app/js/application.js',
   sourceMap: true,
   plugins: [
     nodeResolve({

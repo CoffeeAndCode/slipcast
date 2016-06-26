@@ -6,6 +6,7 @@
     "build": "npm run clean && mkdirp dist && npm run build:css && npm run build:html",
     "build:css": "node bin/build-css.js dist app/css application.css",
     "build:html": "node bin/build-html.js dist",
+    "build:js": "rollup -c config/rollup/config.umd.js && rollup -c config/rollup/config.es.js",
     "clean": "rimraf dist",
     "compress": "node bin/gzip.js dist",
     "lint": "eslint app bin config",
@@ -14,6 +15,7 @@
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",
   "devDependencies": {
+    "babel-preset-es2015-rollup": "^1.1.1",
     "browser-sync": "^2.11.1",
     "cssnano": "^3.5.2",
     "eslint": "^2.13.1",
@@ -29,6 +31,11 @@
     "postcss": "^5.0.16",
     "postcss-cssnext": "^2.4.0",
     "postcss-import": "^8.0.2",
-    "rimraf": "^2.5.2"
+    "rimraf": "^2.5.2",
+    "rollup": "^0.33.0",
+    "rollup-plugin-babel": "^2.6.1",
+    "rollup-plugin-commonjs": "^3.1.0",
+    "rollup-plugin-node-resolve": "^1.7.1",
+    "rollup-plugin-uglify": "^1.0.1"
   }
 }
