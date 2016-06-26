@@ -1,0 +1,35 @@
+{
+  "name": "static",
+  "version": "0.1.0",
+  "description": "Static website builder built on postcss and metalsmith.",
+  "scripts": {
+    "build": "npm run clean && mkdirp dist && npm run build:css && npm run build:html",
+    "build:css": "node bin/build-css.js dist app/css application.css",
+    "build:html": "node bin/build-html.js dist",
+    "clean": "rimraf dist",
+    "compress": "node bin/gzip.js dist",
+    "start": "npm run clean && mkdirp dist && concurrently --kill-others \"npm run watch:css\" \"npm run watch:html\" \"npm run start:browsersync\"",
+    "start:browsersync": "browser-sync start --config config/browsersync.js",
+    "watch:css": "nodemon --ext css --exec \"npm run build:css\" --watch app/css",
+    "watch:html": "nodemon --ext hbs --exec \"npm run build:html\" --watch app/pages --watch app/views"
+  },
+  "author": "Coffee and Code <info@coffeeandcode.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "concurrently": "^2.0.0",
+    "cssnano": "^3.5.2",
+    "eslint": "^2.2.0",
+    "glob": "^7.0.4",
+    "handlebars": "^4.0.5",
+    "metalsmith": "^2.1.0",
+    "metalsmith-in-place": "^1.4.4",
+    "metalsmith-layouts": "^1.6.5",
+    "mkdirp": "^0.5.1",
+    "nodemon": "^1.9.0",
+    "postcss": "^5.0.16",
+    "postcss-cssnext": "^2.4.0",
+    "postcss-import": "^8.0.2",
+    "rimraf": "^2.5.2"
+  }
+}
