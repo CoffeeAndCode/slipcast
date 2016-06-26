@@ -9,19 +9,16 @@
     "clean": "rimraf dist",
     "compress": "node bin/gzip.js dist",
     "lint": "eslint app bin config",
-    "start": "npm run clean && mkdirp dist && concurrently --kill-others \"npm run watch:css\" \"npm run watch:html\" \"npm run start:browsersync\"",
-    "start:browsersync": "browser-sync start --config config/browsersync.js",
-    "watch:css": "nodemon --ext css --exec \"npm run build:css\" --watch app/css",
-    "watch:html": "nodemon --ext hbs --exec \"npm run build:html\" --watch app/pages --watch app/views"
+    "start": "npm run clean && mkdirp dist && nf start --procfile config/Procfile"
   },
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.11.1",
-    "concurrently": "^2.0.0",
     "cssnano": "^3.5.2",
     "eslint": "^2.13.1",
     "eslint-config-coffeeandcode": "0.0.3",
+    "foreman": "^1.4.1",
     "glob": "^7.0.5",
     "handlebars": "^4.0.5",
     "metalsmith": "^2.1.0",
