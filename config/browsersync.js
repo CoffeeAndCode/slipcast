@@ -1,5 +1,8 @@
+const config = require('../lib/config');
+const { join } = require('path');
+
 module.exports = {
-  files: ['dist/**/*.{css,jpg,js,png,svg}'],
+  files: [join(config.output, '**','*.{css,jpg,js,png,svg}')],
   open: false,
-  server: 'dist'
+  server: config.output
 };

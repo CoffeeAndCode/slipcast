@@ -1,26 +1,56 @@
 # Static: A static website generator
 
-This project setup will compile your css, html, and javascript to the `dist/`
-folder. It uses [Metalsmith](http://www.metalsmith.io/), [RollupJS](http://rollupjs.org/),
-[PostCSS](http://postcss.org/), and [Handlebars](http://handlebarsjs.com/).
+This project simplifies the creation of static websites by using convention
+over configuration. It relies on [Metalsmith](http://www.metalsmith.io/),
+[RollupJS](http://rollupjs.org/), [PostCSS](http://postcss.org/), and
+[Handlebars](http://handlebarsjs.com/) to build a directory of static css, html,
+and javascript files.
 
 
-## Folder Structure
+## Usage
 
+Add this to your project with `npm install coffeeandcode-static --save`. Then
+you can add the following to your `package.json` file to build, compress, or
+run a webserver that watches for changes.
+
+```json
+...
+    "scripts": {
+        "build": "coffeeandcode-static",
+        "compress": "coffeeandcode-static --compress",
+        "start": "coffeeandcode-static --watch"
+    }
+...
 ```
-app/css/            # CSS files for the application with `application.css` as the entry point.
-app/js/             # JS files for the application with `application.js` as the entry point.
-app/pages/          # Markdown files that refer to individual pages in the application.
-app/pages/views/    # Handlebars partials that can be used by different pages.
-app/pages/layouts/  # Handlebars files that define the top-level layout of pages.
-bin/                # Node scripts to handle source compilation
-config/             # Config files for the different libraries
-dist/               # Folder static files are written to
+
+
+## Config File
+
+The application looks for a file called `static.json` in the root of the
+application folder for the configuration.
+
+The configuration file looks like:
+
+```json
+{
+  "files": [
+    "application.css",
+    "application.js"
+  ],
+  "folders": {
+    "css": "app/css",
+    "javascript": "app/js",
+    "pages": "app/pages",
+    "views": "app/views"
+  },
+  "output": "dist"
+}
 ```
 
 
-## Development
+## Procfile
 
-Once the dependencies are installed with `npm install`, you can run the application
-with `npm start`. It will automatically watch your source files to changes to
-html, css, and javascript files.
+This project will output a `Procfile` in the calling project's directory and
+will be overwritten each time `coffeeandcode-static` is called. You can either
+add it to your project's `.gitignore` file or to the project itself. The contents
+will not change unless your `static.json` configuration changes.

@@ -1,17 +1,19 @@
+#!/usr/bin/env node
+
+const config = require('../lib/config');
 const postcss = require('postcss');
 const cssImport = require('postcss-import');
 const cssnano = require('cssnano');
 const cssnext = require('postcss-cssnext');
 const mkdirp = require('mkdirp');
-const {readFile, writeFile} = require('fs');
-const {dirname} = require('path');
+const { readFile, writeFile } = require('fs');
+const { dirname, join } = require('path');
 
-const [ , , destinationFolder, sourceFolder, ...files] = process.argv;
-files.forEach(processFile);
-
-function processFile(filename) {
+config.files.filter(file => {
+  return file.endsWith('.css');
+}).forEach(file => {
   return new Promise((resolve, reject) => {
-    readFile(`${sourceFolder}/${filename}`, {encoding: 'utf8'}, (err, data) => {
+    readFile(join(config.folders.css, file), {encoding: 'utf8'}, (err, data) => {
       if (err) { reject(err); }
       resolve(data);
     });
@@ -28,14 +30,14 @@ function processFile(filename) {
     }
 
     return postcss(plugins).process(css, {
-      from: `${sourceFolder}/${filename}`,
-      to: `${destinationFolder}/${filename}`,
+      from: join(config.folders.css, file),
+      to: join(config.output, file),
       map: { inline: false }
     }).catch(error => {
       throw error;
     });
   }).then(function (result) {
-    const cssFilePath = `./${destinationFolder}/${filename}`;
+    const cssFilePath = join(config.output, file);
 
     mkdirp(dirname(cssFilePath), function (error) {
       if (error) { throw error; }
@@ -53,4 +55,4 @@ function processFile(filename) {
   }).catch(function (error) {
     console.error(error);
   });
-}
+});
