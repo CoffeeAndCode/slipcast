@@ -1,16 +1,10 @@
 {
-  "name": "static",
+  "name": "coffeeandcode-static",
   "version": "0.1.0",
   "description": "Static website builder built on postcss and metalsmith.",
+  "bin": "./bin/cli.js",
   "scripts": {
-    "build": "npm run clean && mkdirp dist && npm run build:css && npm run build:html",
-    "build:css": "node bin/build-css.js dist app/css application.css",
-    "build:html": "node bin/build-html.js dist",
-    "build:js": "rollup -c config/rollup/config.umd.js && rollup -c config/rollup/config.es.js",
-    "clean": "rimraf dist",
-    "compress": "node bin/gzip.js dist",
-    "lint": "eslint app bin config",
-    "start": "npm run clean && mkdirp dist && nf start --procfile config/Procfile"
+    "lint": "eslint bin config"
   },
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",
@@ -19,21 +13,23 @@
     "url": "git+https://github.com/CoffeeAndCode/static.git"
   },
   "devDependencies": {
+    "eslint-config-coffeeandcode": "0.1.0"
+  },
+  "dependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",
     "browser-sync": "^2.11.1",
     "cssnano": "^3.5.2",
-    "eslint": "^2.13.1",
-    "eslint-config-coffeeandcode": "0.0.3",
     "foreman": "^1.4.1",
     "glob": "^7.0.5",
     "handlebars": "^4.0.5",
     "metalsmith": "^2.1.0",
     "metalsmith-in-place": "^1.4.4",
     "metalsmith-layouts": "^1.6.5",
+    "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "nodemon": "^1.9.0",
     "postcss": "^5.0.16",
-    "postcss-cssnext": "^2.4.0",
+    "postcss-cssnext": "^2.7.0",
     "postcss-import": "^8.0.2",
     "rimraf": "^2.5.2",
     "rollup": "^0.33.0",
