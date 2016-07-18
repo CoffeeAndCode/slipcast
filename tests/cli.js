@@ -19,14 +19,16 @@ describe('CLI', function() {
 
   describe('help', () => {
     it('will return usage info with --help', done => {
-      exec(`${pkg.bin} --help`, (error, stdout) => {
+      exec(`${pkg.bin} --help`, (error, stdout, stderr) => {
+        expect(stderr).to.eq('');
         expect(stdout).to.contain(`A static site builder built on Metalsmith, PostCSS, and Rollup.js. (v${pkg.version})`);
         done();
       });
     });
 
     it('will return usage info with -h', done => {
-      exec(`${pkg.bin} -h`, (error, stdout) => {
+      exec(`${pkg.bin} -h`, (error, stdout, stderr) => {
+        expect(stderr).to.eq('');
         expect(stdout).to.contain(`A static site builder built on Metalsmith, PostCSS, and Rollup.js. (v${pkg.version})`);
         done();
       });
@@ -35,14 +37,16 @@ describe('CLI', function() {
 
   describe('version', function() {
     it('will return the version number with --version', done => {
-      exec(`${pkg.bin} --version`, (error, stdout) => {
+      exec(`${pkg.bin} --version`, (error, stdout, stderr) => {
+        expect(stderr).to.eq('');
         expect(stdout).to.eq(`${pkg.version}\n`);
         done();
       });
     });
 
     it('will return the version number with -v', done => {
-      exec(`${pkg.bin} -v`, (error, stdout) => {
+      exec(`${pkg.bin} -v`, (error, stdout, stderr) => {
+        expect(stderr).to.eq('');
         expect(stdout).to.eq(`${pkg.version}\n`);
         done();
       });
