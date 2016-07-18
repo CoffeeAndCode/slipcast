@@ -4,7 +4,8 @@
   "description": "Static website builder built on postcss and metalsmith.",
   "bin": "./bin/cli.js",
   "scripts": {
-    "lint": "eslint bin config"
+    "lint": "eslint bin config",
+    "test": "mocha tests/"
   },
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",
@@ -13,7 +14,9 @@
     "url": "git+https://github.com/CoffeeAndCode/static.git"
   },
   "devDependencies": {
-    "eslint-config-coffeeandcode": "0.1.0"
+    "chai": "^3.5.0",
+    "eslint-config-coffeeandcode": "0.1.0",
+    "mocha": "^2.5.3"
   },
   "dependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",
