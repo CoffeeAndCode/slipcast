@@ -7,7 +7,7 @@
   },
   "bin": "./bin/cli.js",
   "scripts": {
-    "lint": "eslint bin config",
+    "lint": "eslint bin config tests/**",
     "test": "mocha tests/"
   },
   "author": "Coffee and Code <info@coffeeandcode.com>",
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "eslint-config-coffeeandcode": "0.1.0",
+    "eslint-config-coffeeandcode": "^0.2.0",
     "mocha": "^2.5.3"
   },
   "dependencies": {

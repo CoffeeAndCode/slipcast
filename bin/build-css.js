@@ -13,14 +13,14 @@ config.files.filter(file => {
   return file.endsWith('.css');
 }).forEach(file => {
   return new Promise((resolve, reject) => {
-    readFile(join(config.folders.css, file), {encoding: 'utf8'}, (err, data) => {
+    readFile(join(config.folders.css, file), { encoding: 'utf8' }, (err, data) => {
       if (err) { reject(err); }
       resolve(data);
     });
   }).then(function(css) {
     const plugins = [
       cssImport(),
-      cssnext({browsers: ['last 2 versions']})
+      cssnext({ browsers: ['last 2 versions'] })
     ];
 
     if (process.env.NODE_ENV === 'production') {

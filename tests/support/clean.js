@@ -1,4 +1,4 @@
-const {join} = require('path');
+const { join } = require('path');
 const rimraf = require('rimraf');
 
 module.exports = function() {

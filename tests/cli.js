@@ -1,7 +1,7 @@
 const clean = require('./support/clean');
-const {afterEach, describe, it} = require('mocha');
-const {expect} = require('chai');
-const {exec} = require('child_process');
+const { afterEach, describe, it } = require('mocha');
+const { expect } = require('chai');
+const { exec } = require('child_process');
 const pkg = require('../package.json');
 
 describe('CLI', function() {
