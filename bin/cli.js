@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const config = require('../lib/config');
 const { spawn } = require('child_process');
 const { readFileSync, writeFileSync } = require('fs');
 const mkdirp = require('mkdirp');
@@ -30,6 +29,8 @@ if (command.help) {
 }
 
 if (process.argv.length <= 2 || command.build) {
+  const config = require('../lib/config');
+
   rimraf.sync(join(process.cwd(), config.output));
   mkdirp.sync(join(process.cwd(), config.output));
 
@@ -41,6 +42,8 @@ if (process.argv.length <= 2 || command.build) {
   spawn(join(__dirname, 'gzip.js'), { stdio: 'inherit' });
 
 } else if (command.watch) {
+  const config = require('../lib/config');
+
   rimraf.sync(join(process.cwd(), config.output));
   mkdirp.sync(join(process.cwd(), config.output));
 
