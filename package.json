@@ -2,6 +2,9 @@
   "name": "coffeeandcode-static",
   "version": "0.1.0",
   "description": "Static website builder built on postcss and metalsmith.",
+  "engines": {
+    "node": ">=6.0"
+  },
   "bin": "./bin/cli.js",
   "scripts": {
     "lint": "eslint bin config",
