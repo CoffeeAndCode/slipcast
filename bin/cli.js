@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
 const { spawn } = require('child_process');
-const { readFileSync, writeFileSync } = require('fs');
+const { writeFileSync } = require('fs');
 const mkdirp = require('mkdirp');
 const minimist = require('minimist');
-const { version } = require('../package.json');
 const { join } = require('path');
 const rimraf = require('rimraf');
+const help = require('../lib/cli/help');
+const version = require('../lib/cli/version');
 
 const command = minimist(process.argv.slice(2), {
   alias: {
@@ -19,12 +20,10 @@ const command = minimist(process.argv.slice(2), {
 });
 
 if (command.help) {
-  const help = readFileSync(join(__dirname, '../', 'help.md'), { encoding: 'utf-8' });
-  console.log(`\n${help.replace('__VERSION__', version)}`);
+  console.log(help());
   return;
-
 } else if (command.version) {
-  console.log(version);
+  console.log(version());
   return;
 }
 
