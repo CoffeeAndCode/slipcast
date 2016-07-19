@@ -26,26 +26,26 @@ run a webserver that watches for changes.
 
 ## Config File
 
-The application looks for a file called `slipcast.json` in the root of the
+The application looks for a file called `slipcast.js` in the root of the
 application folder for the configuration.
 
 The configuration file looks like:
 
-```json
-{
-  "files": [
-    "application.css",
-    "application.js"
+```js
+module.exports = {
+  files: [
+    'application.css',
+    'application.js'
   ],
-  "folders": {
-    "css": "app/css",
-    "javascript": "app/js",
-    "pages": "app/pages",
-    "static": "app/static",
-    "views": "app/views"
+  folders: {
+    css: 'app/css',
+    javascript: 'app/js',
+    pages: 'app/pages',
+    static: 'app/static',
+    views: 'app/views'
   },
-  "output": "dist"
-}
+  output: 'dist'
+};
 ```
 
 
@@ -54,4 +54,4 @@ The configuration file looks like:
 This project will output a `Procfile` in the calling project's directory and
 will be overwritten each time `slipcast` is called. You can either
 add it to your project's `.gitignore` file or to the project itself. The contents
-will not change unless your `slipcast.json` configuration changes.
+will not change unless your `slipcast.js` configuration changes.
