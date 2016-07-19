@@ -1,6 +1,7 @@
 {
   "expectedFiles": [
     "deep",
+    "deep/file-in-a-folder.txt",
     "deep/index.html",
     "application.css",
     "application.css.map",
@@ -8,6 +9,7 @@
     "application.es.js.map",
     "application.umd.js",
     "application.umd.js.map",
-    "index.html"
+    "index.html",
+    "robots.txt"
   ]
 }

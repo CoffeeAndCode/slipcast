@@ -41,6 +41,7 @@ The configuration file looks like:
     "css": "app/css",
     "javascript": "app/js",
     "pages": "app/pages",
+    "static": "app/static",
     "views": "app/views"
   },
   "output": "dist"
