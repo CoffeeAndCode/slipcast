@@ -23,6 +23,10 @@ run a webserver that watches for changes.
 ...
 ```
 
+You can view an example application structure by looking in the `tests/fixtures`
+directory of this project. You can ignore the `test.json` file as it's only used
+for comparing automated test results.
+
 
 ## Config File
 
@@ -46,6 +50,17 @@ module.exports = {
   },
   output: 'dist'
 };
+```
+
+Since the config file is an exported JavaScript module, you can run additional
+code in the same file. For example, you could register a custom Handlebars
+helper by placing the following in your `slipcast.js` file:
+
+```js
+const handlebars = require('handlebars');
+handlebars.registerHelper('capitalize', val => val.toUpperCase());
+
+// The module.exports section can go below...
 ```
 
 
