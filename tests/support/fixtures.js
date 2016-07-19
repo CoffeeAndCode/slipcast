@@ -13,7 +13,8 @@ function expectedAndCompressedFiles(fixtureName) {
 
 function expectedFiles(fixtureName) {
   const config = require(join(__dirname, '../fixtures', fixtureName, 'static.json'));
-  return config.test.expectedFiles.sort().map(file => {
+  const testData = require(join(__dirname, '../fixtures', fixtureName, 'test.json'));
+  return testData.expectedFiles.sort().map(file => {
     return join(__dirname, '../../.tmp', config.output, file);
   });
 }

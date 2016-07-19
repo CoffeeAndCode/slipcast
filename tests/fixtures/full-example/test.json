@@ -1,0 +1,13 @@
+{
+  "expectedFiles": [
+    "deep",
+    "deep/index.html",
+    "application.css",
+    "application.css.map",
+    "application.es.js",
+    "application.es.js.map",
+    "application.umd.js",
+    "application.umd.js.map",
+    "index.html"
+  ]
+}
