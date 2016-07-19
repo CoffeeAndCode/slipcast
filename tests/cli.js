@@ -3,7 +3,8 @@ const { afterEach, beforeEach, describe, it } = require('mocha');
 const { expect } = require('chai');
 const { exec, spawn } = require('child_process');
 const glob = require('glob');
-const { expectedAndCompressedFiles, expectedFiles, loadFixture } = require('./support/fixtures');
+const { get } = require('http');
+const { expectedAndCompressedFiles, expectedFiles, expectedFilesForWatch, loadFixture } = require('./support/fixtures');
 const { join } = require('path');
 const pkg = require('../package.json');
 const psTree = require('ps-tree');
@@ -141,7 +142,7 @@ describe('CLI', function() {
       task.stdout.on('data', () => {
         if (!shuttingDown) {
           glob(join(__dirname, '../.tmp/dist', '**/*'), null, function (error, files) {
-            if (files.toString() === expectedFiles('full-example').toString()) {
+            if (files.toString() === expectedFilesForWatch('full-example').toString()) {
               shuttingDown = true;
               psTree(task.pid, function (err, children) {
                 task.kill();
@@ -155,7 +156,10 @@ describe('CLI', function() {
       task.on('error', done);
 
       task.on('close', () => {
-        done();
+        glob(join(__dirname, '../.tmp/dist', '**/*'), null, function (error, files) {
+          expect(files).to.deep.equal(expectedFilesForWatch('full-example'));
+          done();
+        });
       });
 
       setTimeout(() => {
@@ -175,13 +179,54 @@ describe('CLI', function() {
       task.stdout.on('data', () => {
         if (!shuttingDown) {
           glob(join(__dirname, '../.tmp/dist', '**/*'), null, function (error, files) {
-            if (files.toString() === expectedFiles('full-example').toString()) {
+            if (files.toString() === expectedFilesForWatch('full-example').toString()) {
               shuttingDown = true;
               psTree(task.pid, function (err, children) {
                 task.kill();
                 spawn('kill', ['-9'].concat(children.map(process => process.PID)));
               });
             }
+          });
+        }
+      });
+
+      task.on('error', done);
+
+      task.on('close', () => {
+        glob(join(__dirname, '../.tmp/dist', '**/*'), null, function (error, files) {
+          expect(files).to.deep.equal(expectedFilesForWatch('full-example'));
+          done();
+        });
+      });
+
+      setTimeout(() => {
+        psTree(task.pid, function (err, children) {
+          task.kill();
+          spawn('kill', ['-9'].concat(children.map(process => process.PID)));
+        });
+      }, 10 * 1000);
+    });
+
+    it('will allow access to a static file through the webserver', function(done) {
+      const task = spawn(join('../', pkg.bin), ['-w'], {
+        cwd: join(__dirname, '../.tmp')
+      });
+
+      task.stdout.on('data', (data) => {
+        const matches = data.toString().match(/Local\: (http\:\/\/localhost\:\d+)/);
+        if (matches) {
+          get(`${matches[1]}/robots.txt`, response => {
+            expect(response.statusCode).to.eq(200);
+
+            psTree(task.pid, function (err, children) {
+              task.kill();
+              spawn('kill', ['-9'].concat(children.map(process => process.PID)));
+            });
+          }).on('error', function() {
+            psTree(task.pid, function (err, children) {
+              task.kill();
+              spawn('kill', ['-9'].concat(children.map(process => process.PID)));
+            });
           });
         }
       });

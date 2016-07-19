@@ -19,6 +19,14 @@ function expectedFiles(fixtureName) {
   });
 }
 
+function expectedFilesForWatch(fixtureName) {
+  const config = require(join(__dirname, '../fixtures', fixtureName, 'static.json'));
+  const testData = require(join(__dirname, '../fixtures', fixtureName, 'test.json'));
+  return testData.expectedFilesForWatch.sort().map(file => {
+    return join(__dirname, '../../.tmp', config.output, file);
+  });
+}
+
 function loadFixture(fixtureName) {
   return function () {
     rimraf.sync(join(__dirname, '../../.tmp'));
@@ -28,6 +36,7 @@ function loadFixture(fixtureName) {
 
 module.exports = {
   expectedFiles: expectedFiles,
+  expectedFilesForWatch: expectedFilesForWatch,
   expectedAndCompressedFiles: expectedAndCompressedFiles,
   loadFixture: loadFixture
 }
