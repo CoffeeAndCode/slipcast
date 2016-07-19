@@ -8,7 +8,8 @@
   "bin": "./bin/cli.js",
   "scripts": {
     "lint": "eslint bin config lib tests",
-    "test": "mocha tests/"
+    "test": "mocha tests/ --bail",
+    "test:ci": "mocha tests/"
   },
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",

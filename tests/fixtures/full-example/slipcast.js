@@ -1,3 +1,7 @@
+// Example of registering an example Handlebars helper.
+const handlebars = require('handlebars');
+handlebars.registerHelper('capitalize', val => val.toUpperCase());
+
 module.exports = {
   files: [
     'application.css',

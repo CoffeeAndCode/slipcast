@@ -2,6 +2,7 @@ const clean = require('./support/clean');
 const { afterEach, beforeEach, describe, it } = require('mocha');
 const { expect } = require('chai');
 const { exec, spawn } = require('child_process');
+const { readFileSync } = require('fs');
 const glob = require('glob');
 const { get } = require('http');
 const { expectedAndCompressedFiles, expectedFiles, expectedFilesForWatch, loadFixture } = require('./support/fixtures');
@@ -42,6 +43,15 @@ describe('CLI', function() {
           expect(files).to.deep.equal(expectedFiles('full-example'));
           done();
         });
+      });
+    });
+
+    it('will utilize the custom handlebars helper in slipcast.js', function(done) {
+      exec(`${join('../', pkg.bin)} -b`, {
+        cwd: join(__dirname, '../.tmp')
+      }, (error, stdout, stderr) => {
+        expect(readFileSync(join(__dirname, '../.tmp/dist/deep/index.html'), { encoding: 'utf8' })).to.contain('GOING DEEP');
+        done();
       });
     });
   });
