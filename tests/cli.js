@@ -9,7 +9,8 @@ const pkg = require('../package.json');
 const psTree = require('ps-tree');
 
 describe('CLI', function() {
-  this.slow(2000);
+  this.slow(2 * 1000);
+  this.timeout(20 * 1000);
 
   describe('build', function() {
     afterEach(clean);
@@ -128,8 +129,6 @@ describe('CLI', function() {
   });
 
   describe('watch', function() {
-    this.timeout(10000);
-
     afterEach(clean);
     beforeEach(loadFixture('full-example'));
 
@@ -145,9 +144,9 @@ describe('CLI', function() {
             if (files.toString() === expectedFiles('full-example').toString()) {
               shuttingDown = true;
               psTree(task.pid, function (err, children) {
-                spawn('kill', ['-9'].concat(children.map(p => p.PID)));
+                task.kill();
+                spawn('kill', ['-9'].concat(children.map(process => process.PID)));
               });
-              task.kill();
             }
           });
         }
@@ -161,10 +160,10 @@ describe('CLI', function() {
 
       setTimeout(() => {
         psTree(task.pid, function (err, children) {
-          spawn('kill', ['-9'].concat(children.map(p => p.PID)));
+          task.kill();
+          spawn('kill', ['-9'].concat(children.map(process => process.PID)));
         });
-        task.kill();
-      }, 5000);
+      }, 5 * 1000);
     });
 
     it('will build and watch files in the provided destination with -w', function(done) {
@@ -179,9 +178,9 @@ describe('CLI', function() {
             if (files.toString() === expectedFiles('full-example').toString()) {
               shuttingDown = true;
               psTree(task.pid, function (err, children) {
-                spawn('kill', ['-9'].concat(children.map(p => p.PID)));
+                task.kill();
+                spawn('kill', ['-9'].concat(children.map(process => process.PID)));
               });
-              task.kill();
             }
           });
         }
@@ -195,10 +194,10 @@ describe('CLI', function() {
 
       setTimeout(() => {
         psTree(task.pid, function (err, children) {
-          spawn('kill', ['-9'].concat(children.map(p => p.PID)));
+          task.kill();
+          spawn('kill', ['-9'].concat(children.map(process => process.PID)));
         });
-        task.kill();
-      }, 5000);
+      }, 10 * 1000);
     });
   });
 });
