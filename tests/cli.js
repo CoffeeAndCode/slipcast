@@ -49,7 +49,7 @@ describe('CLI', function() {
     it('will utilize the custom handlebars helper in slipcast.js', function(done) {
       exec(`${join('../', pkg.bin)} -b`, {
         cwd: join(__dirname, '../.tmp')
-      }, (error, stdout, stderr) => {
+      }, () => {
         expect(readFileSync(join(__dirname, '../.tmp/dist/deep/index.html'), { encoding: 'utf8' })).to.contain('GOING DEEP');
         done();
       });
