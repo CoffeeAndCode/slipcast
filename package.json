@@ -1,5 +1,5 @@
 {
-  "name": "coffeeandcode-static",
+  "name": "slipcast",
   "version": "0.1.0",
   "description": "Static website builder built on postcss and metalsmith.",
   "engines": {
@@ -14,7 +14,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CoffeeAndCode/static.git"
+    "url": "git+https://github.com/CoffeeAndCode/slipcast.git"
   },
   "devDependencies": {
     "chai": "^3.5.0",
