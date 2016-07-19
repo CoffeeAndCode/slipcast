@@ -3,12 +3,14 @@ const { afterEach, beforeEach, describe, it } = require('mocha');
 const { expect } = require('chai');
 const { exec, spawn } = require('child_process');
 const glob = require('glob');
-const { expectedFiles, loadFixture } = require('./support/fixtures');
+const { expectedAndCompressedFiles, expectedFiles, loadFixture } = require('./support/fixtures');
 const { join } = require('path');
 const pkg = require('../package.json');
 const psTree = require('ps-tree');
 
 describe('CLI', function() {
+  this.slow(2000);
+
   describe('build', function() {
     afterEach(clean);
     beforeEach(loadFixture('full-example'));
@@ -44,8 +46,49 @@ describe('CLI', function() {
 
   describe('compress', function() {
     afterEach(clean);
+    beforeEach(loadFixture('full-example'));
 
-    // TODO: write tests
+    it('will created compressed versions of files in output dir with -c', function(done) {
+      exec(`${join('../', pkg.bin)} --build`, {
+        cwd: join(__dirname, '../.tmp')
+      }, (error, stdout, stderr) => {
+        expect(stdout).to.equal('');
+        expect(stderr).to.equal('');
+
+        exec(`${join('../', pkg.bin)} -c`, {
+          cwd: join(__dirname, '../.tmp')
+        }, (error, stdout, stderr) => {
+          expect(stdout).to.equal('');
+          expect(stderr).to.equal('');
+
+          glob(join(__dirname, '../.tmp/dist', '**/*'), null, function (error, files) {
+            expect(files).to.deep.equal(expectedAndCompressedFiles('full-example'));
+            done();
+          });
+        });
+      });
+    });
+
+    it('will created compressed versions of files in output dir with --compress', function(done) {
+      exec(`${join('../', pkg.bin)} --build`, {
+        cwd: join(__dirname, '../.tmp')
+      }, (error, stdout, stderr) => {
+        expect(stdout).to.equal('');
+        expect(stderr).to.equal('');
+
+        exec(`${join('../', pkg.bin)} --compress`, {
+          cwd: join(__dirname, '../.tmp')
+        }, (error, stdout, stderr) => {
+          expect(stdout).to.equal('');
+          expect(stderr).to.equal('');
+
+          glob(join(__dirname, '../.tmp/dist', '**/*'), null, function (error, files) {
+            expect(files).to.deep.equal(expectedAndCompressedFiles('full-example'));
+            done();
+          });
+        });
+      });
+    });
   });
 
   describe('help', () => {
