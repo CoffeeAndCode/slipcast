@@ -11,13 +11,13 @@ Metalsmith('.')
   .use(require('metalsmith-in-place')({
     engine: 'handlebars',
     partials: config.folders.views,
-    pattern: '**/*.hbs',
-    rename: true
+    pattern: '**/*.hbs'
   }))
   .use(require('metalsmith-layouts')({
     default: 'application.hbs',
     directory: join(config.folders.views, 'layouts'),
     engine: 'handlebars',
+    pattern: '**/*.hbs',
     partials: config.folders.views,
     rename: true
   }))

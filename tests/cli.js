@@ -54,6 +54,15 @@ describe('CLI', function() {
         done();
       });
     });
+
+    it('will use the secondary.hbs layout for deep/index.html', function(done) {
+      exec(`${join('../', pkg.bin)} -b`, {
+        cwd: join(__dirname, '../.tmp')
+      }, () => {
+        expect(readFileSync(join(__dirname, '../.tmp/dist/deep/index.html'), { encoding: 'utf8' })).to.contain('Secondary - ');
+        done();
+      });
+    });
   });
 
   describe('compress', function() {
