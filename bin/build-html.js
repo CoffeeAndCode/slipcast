@@ -13,6 +13,7 @@ Metalsmith('.')
   .clean(false)
   .destination(config.output)
   .source(config.folders.pages)
+  .uses(config.build.html.beforePlugins)
   .use(function(files, metalsmith, done) {
     Object.keys(files).forEach(file => {
       files[file].path = parse(file);
@@ -32,7 +33,7 @@ Metalsmith('.')
     partials: config.folders.views,
     rename: true
   }))
-  .uses(config.build.plugins)
+  .uses(config.build.html.afterPlugins)
   .build(function(error) {
     if (error) { throw error; }
   });

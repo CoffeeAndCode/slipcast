@@ -63,6 +63,15 @@ describe('CLI', function() {
         done();
       });
     });
+
+    it('will show custom metalsmith plugin metadata', function(done) {
+      exec(`${join('../', pkg.bin)} -b`, {
+        cwd: join(__dirname, '../.tmp')
+      }, () => {
+        expect(readFileSync(join(__dirname, '../.tmp/dist/deep/index.html'), { encoding: 'utf8' })).to.contain('I am deep/index.hbs');
+        done();
+      });
+    });
   });
 
   describe('compress', function() {
