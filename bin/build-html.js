@@ -4,6 +4,11 @@ const config = require('../lib/config');
 const Metalsmith = require('metalsmith');
 const { join, parse } = require('path');
 
+Metalsmith.prototype.uses = function(plugins) {
+  this.plugins.push.apply(this.plugins, plugins);
+  return this;
+}
+
 Metalsmith('.')
   .clean(false)
   .destination(config.output)
@@ -27,6 +32,7 @@ Metalsmith('.')
     partials: config.folders.views,
     rename: true
   }))
+  .uses(config.build.plugins)
   .build(function(error) {
     if (error) { throw error; }
   });
