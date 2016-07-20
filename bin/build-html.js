@@ -2,12 +2,18 @@
 
 const config = require('../lib/config');
 const Metalsmith = require('metalsmith');
-const { join } = require('path');
+const { join, parse } = require('path');
 
 Metalsmith('.')
   .clean(false)
   .destination(config.output)
   .source(config.folders.pages)
+  .use(function(files, metalsmith, done) {
+    Object.keys(files).forEach(file => {
+      files[file].path = parse(file);
+    });
+    done();
+  })
   .use(require('metalsmith-in-place')({
     engine: 'handlebars',
     partials: config.folders.views,
