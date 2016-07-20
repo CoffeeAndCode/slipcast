@@ -1,6 +1,6 @@
 {
   "name": "slipcast",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Static website builder built on postcss and metalsmith.",
   "engines": {
     "node": ">=6.0"
