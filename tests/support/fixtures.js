@@ -1,6 +1,16 @@
 const { execSync } = require('child_process');
 const { join } = require('path');
+const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
+
+function clean() {
+  rimraf.sync(join(__dirname, '../../.tmp/'));
+}
+
+function createTmpDirectory() {
+  rimraf.sync(join(__dirname, '../../.tmp/'));
+  mkdirp.sync(join(__dirname, '../../.tmp'));
+}
 
 function expectedAndCompressedFiles(fixtureName) {
   const initialFiles = expectedFiles(fixtureName);
@@ -29,12 +39,14 @@ function expectedFilesForWatch(fixtureName) {
 
 function loadFixture(fixtureName) {
   return function () {
-    rimraf.sync(join(__dirname, '../../.tmp'));
+    clean();
     execSync(`cp -R ${join(__dirname, '../fixtures', fixtureName, '/')} ${join(__dirname, '../../.tmp')}`, { stdio: 'inherit' });
   }
 }
 
 module.exports = {
+  clean: clean,
+  createTmpDirectory: createTmpDirectory,
   expectedFiles: expectedFiles,
   expectedFilesForWatch: expectedFilesForWatch,
   expectedAndCompressedFiles: expectedAndCompressedFiles,

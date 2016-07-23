@@ -1,15 +1,15 @@
 {
   "name": "slipcast",
   "version": "0.2.0",
-  "description": "Static website builder built on postcss and metalsmith.",
+  "description": "A zero config static website builder you can leave at anytime.",
   "engines": {
     "node": ">=6.0"
   },
   "bin": "./bin/slipcast.js",
   "scripts": {
-    "lint": "eslint bin config lib tests",
-    "test": "mocha tests/ --bail",
-    "test:ci": "mocha tests/"
+    "lint": "eslint bin config global-cli lib tests",
+    "test": "mocha --bail --require tests/support/testHelper.js tests/**/*.js",
+    "test:ci": "mocha --require tests/support/testHelper.js tests/**/*.js"
   },
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",

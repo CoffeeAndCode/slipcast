@@ -1,7 +1,7 @@
 module.exports = function() {
-  const { version } = require('../../package.json');
+  const { version } = require('../package.json');
 
-  return String.raw`
+  return `
  _______  ___      ___   _______  _______  _______  _______  _______
 |       ||   |    |   | |       ||       ||   _   ||       ||       |
 |  _____||   |    |   | |    _  ||       ||  |_|  ||  _____||_     _|
@@ -10,17 +10,15 @@ module.exports = function() {
  _____| ||       ||   | |   |    |     |_ |   _   | _____| |  |   |
 |_______||_______||___| |___|    |_______||__| |__||_______|  |___|
 
-A static site builder built on Metalsmith, PostCSS, and Rollup.js. (v${version})
+A zero config static website builder you can leave at anytime. (v${version})
 ===========================================================================
 
-Usage: slipcast [options]
+Usage: slipcast [options] <new-project-directory>
 
 Basic options:
 
--b, --build              Build all project files and exit
--c, --compress           Compress the files in the output directory
 -h, --help               Show this help message
--v, --version            Show version number
--w, --watch              Start a webserver and watch files for changes
+-v, --version            Show version number of slipcast-cli
+    --verbose            Show more information about new project creation
 `;
 };
