@@ -31,8 +31,7 @@ describe('global-cli', function() {
     it('will create the app if the project directory does not exist', function(done) {
       exec(`${join(__dirname, '../../global-cli', pkg.bin)} new-project`, {
         cwd: join(__dirname, '../../.tmp')
-      }, (error, stdout, stderr) => {
-        expect(stderr).to.equal('');
+      }, (error, stdout) => {
         expect(stdout).to.contain('Creating a new Slipcast app in ');
         done();
       });
@@ -41,9 +40,7 @@ describe('global-cli', function() {
     it('will create a package.json file for the app', function(done) {
       exec(`${join(__dirname, '../../global-cli', pkg.bin)} new-project`, {
         cwd: join(__dirname, '../../.tmp')
-      }, (error, stdout, stderr) => {
-        expect(stderr).to.equal('');
-
+      }, () => {
         const package = require(join(__dirname, '../../.tmp/new-project/package.json'));
         expect(package.name).to.eq('new-project');
         expect(package.private).to.eq(true);
