@@ -7,7 +7,7 @@
   },
   "bin": "./bin/slipcast.js",
   "scripts": {
-    "lint": "eslint bin config global-cli lib tests",
+    "lint": "eslint bin config global-cli lib scripts tests",
     "test": "mocha --bail --require tests/support/testHelper.js tests/**/*.js",
     "test:ci": "mocha --require tests/support/testHelper.js tests/**/*.js"
   },
