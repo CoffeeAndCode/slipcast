@@ -22,7 +22,10 @@ function expectedAndCompressedFiles(fixtureName) {
 }
 
 function expectedFiles(fixtureName) {
-  const config = require(join(__dirname, '../fixtures', fixtureName, 'slipcast'));
+  const processDir = process.cwd();
+  process.chdir(join(__dirname, '../../.tmp'));
+  const config = require(join(__dirname, '../../config/slipcast'));
+  process.chdir(processDir);
   const testData = require(join(__dirname, '../fixtures', fixtureName, 'test.json'));
   return testData.expectedFiles.sort().map(file => {
     return join(__dirname, '../../.tmp', config.output, file);
@@ -30,7 +33,10 @@ function expectedFiles(fixtureName) {
 }
 
 function expectedFilesForWatch(fixtureName) {
-  const config = require(join(__dirname, '../fixtures', fixtureName, 'slipcast'));
+  const processDir = process.cwd();
+  process.chdir(join(__dirname, '../../.tmp'));
+  const config = require(join(__dirname, '../../config/slipcast'));
+  process.chdir(processDir);
   const testData = require(join(__dirname, '../fixtures', fixtureName, 'test.json'));
   return testData.expectedFilesForWatch.sort().map(file => {
     return join(__dirname, '../../.tmp', config.output, file);

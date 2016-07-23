@@ -1,16 +1,13 @@
-#!/usr/bin/env node
+'use strict';
 
 const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
-const config = require('../lib/config');
+const config = require('../config/slipcast');
 const { join } = require('path');
 const nodeResolve = require('rollup-plugin-node-resolve');
-const rollup = require('rollup');
 const uglify = require('rollup-plugin-uglify');
 
-config.files.filter(file => {
-  return file.endsWith('.js');
-}).forEach(file => {
+module.exports = function(file) {
   const rollupConfig = {
     entry: join(config.folders.javascript, file),
     plugins: [
@@ -35,19 +32,5 @@ config.files.filter(file => {
     rollupConfig.plugins.push(uglify());
   }
 
-  rollup.rollup(rollupConfig).then(function(bundle) {
-    bundle.write({
-      dest: join(config.output, file.replace(/\.js$/, '.es.js')),
-      format: 'es',
-      sourceMap: true
-    });
-
-    bundle.write({
-      dest: join(config.output, file.replace(/\.js$/, '.umd.js')),
-      format: 'umd',
-      sourceMap: true
-    });
-  }).catch(function(error) {
-    console.error(error);
-  });
-});
+  return rollupConfig;
+}

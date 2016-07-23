@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+'use strict';
 
-const config = require('../lib/config');
+const config = require('../../config/slipcast');
 const postcss = require('postcss');
 const cssImport = require('postcss-import');
 const cssnano = require('cssnano');
@@ -53,6 +53,6 @@ config.files.filter(file => {
       }
     });
   }).catch(function (error) {
-    console.error(error);
+    throw error;
   });
 });

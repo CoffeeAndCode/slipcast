@@ -1,0 +1,26 @@
+{
+  "expectedFiles": [
+    "deep",
+    "deep/file-in-a-folder.txt",
+    "deep/index.html",
+    "app.css",
+    "app.css.map",
+    "app.es.js",
+    "app.es.js.map",
+    "app.umd.js",
+    "app.umd.js.map",
+    "index.html",
+    "robots.txt"
+  ],
+  "expectedFilesForWatch": [
+    "deep",
+    "deep/index.html",
+    "app.css",
+    "app.css.map",
+    "app.es.js",
+    "app.es.js.map",
+    "app.umd.js",
+    "app.umd.js.map",
+    "index.html"
+  ]
+}

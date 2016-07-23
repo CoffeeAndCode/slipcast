@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 'use strict';
 
-const build = require('../lib/cli/build');
-const compress = require('../lib/cli/compress');
+const build = require('../scripts/build');
+const compress = require('../scripts/compress');
 const minimist = require('minimist');
-const watch = require('../lib/cli/watch');
+const watch = require('../scripts/watch');
 
 const command = minimist(process.argv.slice(2), {
   alias: {

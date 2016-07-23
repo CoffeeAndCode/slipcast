@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+'use strict';
 
-const config = require('../lib/config');
+const config = require('../../config/slipcast');
 const Metalsmith = require('metalsmith');
 const { join, parse } = require('path');
 

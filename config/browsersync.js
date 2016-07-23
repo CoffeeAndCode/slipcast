@@ -1,4 +1,6 @@
-const config = require('../lib/config');
+'use strict';
+
+const config = require('../config/slipcast');
 const { join } = require('path');
 
 module.exports = {
