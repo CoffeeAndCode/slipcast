@@ -54,7 +54,7 @@ function run(projectDirectory, appName, verbose) {
       process.exit(1);
     }
 
-    const init = require.resolve('slipcast/scripts/init');
+    const init = require(join(process.cwd(), 'node_modules/slipcast/scripts/init'));
     init(projectDirectory, appName, verbose);
   });
 }
