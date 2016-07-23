@@ -56,7 +56,7 @@ describe('global-cli', function() {
         cwd: join(__dirname, '../../global-cli/')
       }, (error, stdout, stderr) => {
         expect(stderr).to.equal('');
-        expect(stdout).to.contain(`A zero config static website builder you can leave at anytime. (v${pkg.version})`);
+        expect(stdout).to.contain(`A minimal config static website builder you can leave at anytime. (v${pkg.version})`);
         done();
       });
     });
@@ -66,7 +66,7 @@ describe('global-cli', function() {
         cwd: join(__dirname, '../../global-cli/')
       }, (error, stdout, stderr) => {
         expect(stderr).to.equal('');
-        expect(stdout).to.contain(`A zero config static website builder you can leave at anytime. (v${pkg.version})`);
+        expect(stdout).to.contain(`A minimal config static website builder you can leave at anytime. (v${pkg.version})`);
         done();
       });
     });

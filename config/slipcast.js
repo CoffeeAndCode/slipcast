@@ -10,6 +10,8 @@ try {
   }
 } catch (exception) {
   // ignore execption if file cannot be found
+  console.error('We could not find a slipcast.js file for your project. Are you in the right directory?');
+  process.exit(1);
 }
 
 // default values for slipcast config
@@ -20,10 +22,7 @@ const defaults = {
       beforePlugins: []
     }
   },
-  files: [
-    'app.css',
-    'app.js'
-  ],
+  files: [],
   folders: {
     css: 'app/css',
     javascript: 'app/js',

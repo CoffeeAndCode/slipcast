@@ -8,11 +8,49 @@ const { clean, expectedAndCompressedFiles, expectedFiles, expectedFilesForWatch,
 const { join } = require('path');
 const pkg = require('../../package.json');
 const psTree = require('ps-tree');
+const rimraf = require('rimraf');
 
 describe('CLI', function() {
   this.slow(2 * 1000);
   this.timeout(20 * 1000);
   afterEach(clean);
+
+  describe('template without config', function() {
+    beforeEach(loadFixture('barebones'));
+    beforeEach(function() {
+      rimraf.sync(join(__dirname, '../../.tmp/slipcast.js'));
+    });
+
+    it('will show an error if slipcast.js cannot be found for build command', function(done) {
+      exec(`${join(__dirname, '../../', pkg.bin)} --build`, {
+        cwd: join(__dirname, '../../.tmp')
+      }, (error, stdout, stderr) => {
+        expect(stdout).to.equal('');
+        expect(stderr).to.equal("We could not find a slipcast.js file for your project. Are you in the right directory?\n");
+        done();
+      });
+    });
+
+    it('will show an error if slipcast.js cannot be found for compile command', function(done) {
+      exec(`${join(__dirname, '../../', pkg.bin)} --compile`, {
+        cwd: join(__dirname, '../../.tmp')
+      }, (error, stdout, stderr) => {
+        expect(stdout).to.equal('');
+        expect(stderr).to.equal("We could not find a slipcast.js file for your project. Are you in the right directory?\n");
+        done();
+      });
+    });
+
+    it('will show an error if slipcast.js cannot be found for watch command', function(done) {
+      exec(`${join(__dirname, '../../', pkg.bin)} --watch`, {
+        cwd: join(__dirname, '../../.tmp')
+      }, (error, stdout, stderr) => {
+        expect(stdout).to.equal('');
+        expect(stderr).to.equal("We could not find a slipcast.js file for your project. Are you in the right directory?\n");
+        done();
+      });
+    });
+  });
 
   describe('barebones template', function() {
     beforeEach(loadFixture('barebones'));

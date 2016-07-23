@@ -10,7 +10,7 @@ module.exports = function() {
  _____| ||       ||   | |   |    |     |_ |   _   | _____| |  |   |
 |_______||_______||___| |___|    |_______||__| |__||_______|  |___|
 
-A zero config static website builder you can leave at anytime. (v${version})
+A minimal config static website builder you can leave at anytime. (v${version})
 ===========================================================================
 
 Usage: slipcast [options] <new-project-directory>
