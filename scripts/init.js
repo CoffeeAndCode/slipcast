@@ -1,7 +1,7 @@
 'use strict';
 
 const { spawn } = require('child_process');
-const { readFile, writeFile } = require('fs');
+const { writeFile } = require('fs');
 const { join } = require('path');
 
 module.exports = function(projectDirectory, appName, verbose) {
@@ -10,13 +10,13 @@ module.exports = function(projectDirectory, appName, verbose) {
   }
 
   console.log('Updating package.json scripts');
-  const packageJSON = require(join(parentDirectory, 'package.json'));
+  const packageJSON = require(join(projectDirectory, 'package.json'));
   packageJSON.scripts = {
     build: 'slipcast --build',
     compress: 'slipcast --compress',
     start: 'slipcast --watch'
   };
-  writeFile(join(parentDirectory, 'package.json'), JSON.stringify(packageJSON, null, 2), function(error, data) {
+  writeFile(join(projectDirectory, 'package.json'), JSON.stringify(packageJSON, null, 2), function(error) {
     if (error) { throw error; }
   });
 
