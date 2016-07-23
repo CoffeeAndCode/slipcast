@@ -1,13 +1,14 @@
 {
   "name": "slipcast-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The global command interface for Slipcast: the zero config static website builder you can leave at anytime.",
   "engines": {
     "node": ">=6.0"
   },
   "bin": "./index.js",
   "files": [
-    "help.js",
+    "lib/createApp.js",
+    "lib/help.js",
     "index.js"
   ],
   "author": "Coffee and Code <info@coffeeandcode.com>",
