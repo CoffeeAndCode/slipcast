@@ -26,7 +26,7 @@ module.exports = function(name, verbose) {
     ], { stdio: 'inherit' });
   }
 
-  var packageJson = {
+  const packageJson = {
     name: appName,
     version: '0.0.1',
     private: true

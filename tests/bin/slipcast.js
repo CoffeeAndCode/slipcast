@@ -1,13 +1,17 @@
+const promisify = require('es6-promisify');
 const { afterEach, beforeEach, describe, it } = require('mocha');
 const { expect } = require('chai');
 const { exec, spawn } = require('child_process');
-const { readFileSync } = require('fs');
-const glob = require('glob');
+const { readFileSync, writeFileSync } = require('fs');
+const glob = promisify(require('glob'));
 const { get } = require('http');
+const init = require('../../scripts/init');
 const { clean, expectedAndCompressedFiles, expectedFiles, expectedFilesForWatch, loadFixture } = require('../support/fixtures');
+const { runFromDirectory } = require('../support/process');
 const { join } = require('path');
 const pkg = require('../../package.json');
 const psTree = require('ps-tree');
+const mkdirp = require('mkdirp');
 const rimraf = require('rimraf');
 
 describe('CLI', function() {
@@ -52,6 +56,37 @@ describe('CLI', function() {
     });
   });
 
+  describe('init', function() {
+    beforeEach(function() {
+      mkdirp.sync(join(__dirname, '../../.tmp/'));
+      const packageJson = {
+        name: 'example',
+        version: '0.0.1',
+        private: true,
+        dependencies: {
+          slipcast: require(join(__dirname, '../../package.json')).version
+        }
+      };
+      writeFileSync(join(__dirname, '../../.tmp/package.json'), JSON.stringify(packageJson, null, 2));
+    });
+
+    it('will create a fresh project in the folder specified', function(done) {
+      runFromDirectory(join(__dirname, '../../.tmp'), done, function(done) {
+        init('.tmp', 'app-name', false).then(() => {
+          Promise.all([
+            glob(join(__dirname, '../../template', '**/*')),
+            glob(join(process.cwd(), '**/*'))
+          ]).then(results => {
+            // Resulting folder has a package.json so adjust count by 1
+            // when comparing the total number of files in each directory.
+            expect(results[0].length + 1).to.eq(results[1].length);
+            done();
+          }).catch(done);
+        }).catch(done);
+      });
+    });
+  });
+
   describe('barebones template', function() {
     beforeEach(loadFixture('barebones'));
 
@@ -63,10 +98,10 @@ describe('CLI', function() {
           expect(stdout).to.equal('');
           expect(stderr).to.equal('');
 
-          glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+          glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
             expect(files).to.deep.equal(expectedFiles('barebones'));
             done();
-          });
+          }).catch(done);
         });
       });
 
@@ -77,10 +112,10 @@ describe('CLI', function() {
           expect(stdout).to.equal('');
           expect(stderr).to.equal('');
 
-          glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+          glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
             expect(files).to.deep.equal(expectedFiles('barebones'));
             done();
-          });
+          }).catch(done);
         });
       });
 
@@ -108,10 +143,10 @@ describe('CLI', function() {
             expect(stdout).to.equal('');
             expect(stderr).to.equal('');
 
-            glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+            glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
               expect(files).to.deep.equal(expectedAndCompressedFiles('barebones'));
               done();
-            });
+            }).catch(done);
           });
         });
       });
@@ -129,10 +164,10 @@ describe('CLI', function() {
             expect(stdout).to.equal('');
             expect(stderr).to.equal('');
 
-            glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+            glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
               expect(files).to.deep.equal(expectedAndCompressedFiles('barebones'));
               done();
-            });
+            }).catch(done);
           });
         });
       });
@@ -147,7 +182,7 @@ describe('CLI', function() {
 
         task.stdout.on('data', () => {
           if (!shuttingDown) {
-            glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+            glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
               if (files.toString() === expectedFilesForWatch('barebones').toString()) {
                 shuttingDown = true;
                 psTree(task.pid, function (err, children) {
@@ -155,17 +190,17 @@ describe('CLI', function() {
                   spawn('kill', ['-9'].concat(children.map(process => process.PID)));
                 });
               }
-            });
+            }).catch(done);
           }
         });
 
         task.on('error', done);
 
         task.on('close', () => {
-          glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+          glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
             expect(files).to.deep.equal(expectedFilesForWatch('barebones'));
             done();
-          });
+          }).catch(done);
         });
 
         setTimeout(() => {
@@ -184,7 +219,7 @@ describe('CLI', function() {
 
         task.stdout.on('data', () => {
           if (!shuttingDown) {
-            glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+            glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
               if (files.toString() === expectedFilesForWatch('barebones').toString()) {
                 shuttingDown = true;
                 psTree(task.pid, function (err, children) {
@@ -192,17 +227,17 @@ describe('CLI', function() {
                   spawn('kill', ['-9'].concat(children.map(process => process.PID)));
                 });
               }
-            });
+            }).catch(done);
           }
         });
 
         task.on('error', done);
 
         task.on('close', () => {
-          glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+          glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
             expect(files).to.deep.equal(expectedFilesForWatch('barebones'));
             done();
-          });
+          }).catch(done);
         });
 
         setTimeout(() => {
@@ -264,10 +299,10 @@ describe('CLI', function() {
           expect(stdout).to.equal('');
           expect(stderr).to.equal('');
 
-          glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+          glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
             expect(files).to.deep.equal(expectedFiles('full-example'));
             done();
-          });
+          }).catch(done);
         });
       });
 
@@ -278,10 +313,10 @@ describe('CLI', function() {
           expect(stdout).to.equal('');
           expect(stderr).to.equal('');
 
-          glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+          glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
             expect(files).to.deep.equal(expectedFiles('full-example'));
             done();
-          });
+          }).catch(done);
         });
       });
 
@@ -327,10 +362,10 @@ describe('CLI', function() {
             expect(stdout).to.equal('');
             expect(stderr).to.equal('');
 
-            glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+            glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
               expect(files).to.deep.equal(expectedAndCompressedFiles('full-example'));
               done();
-            });
+            }).catch(done);
           });
         });
       });
@@ -348,10 +383,10 @@ describe('CLI', function() {
             expect(stdout).to.equal('');
             expect(stderr).to.equal('');
 
-            glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+            glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
               expect(files).to.deep.equal(expectedAndCompressedFiles('full-example'));
               done();
-            });
+            }).catch(done);
           });
         });
       });
@@ -366,7 +401,7 @@ describe('CLI', function() {
 
         task.stdout.on('data', () => {
           if (!shuttingDown) {
-            glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+            glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
               if (files.toString() === expectedFilesForWatch('full-example').toString()) {
                 shuttingDown = true;
                 psTree(task.pid, function (err, children) {
@@ -374,17 +409,17 @@ describe('CLI', function() {
                   spawn('kill', ['-9'].concat(children.map(process => process.PID)));
                 });
               }
-            });
+            }).catch(done);
           }
         });
 
         task.on('error', done);
 
         task.on('close', () => {
-          glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+          glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
             expect(files).to.deep.equal(expectedFilesForWatch('full-example'));
             done();
-          });
+          }).catch(done);
         });
 
         setTimeout(() => {
@@ -403,7 +438,7 @@ describe('CLI', function() {
 
         task.stdout.on('data', () => {
           if (!shuttingDown) {
-            glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+            glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
               if (files.toString() === expectedFilesForWatch('full-example').toString()) {
                 shuttingDown = true;
                 psTree(task.pid, function (err, children) {
@@ -411,17 +446,17 @@ describe('CLI', function() {
                   spawn('kill', ['-9'].concat(children.map(process => process.PID)));
                 });
               }
-            });
+            }).catch(done);
           }
         });
 
         task.on('error', done);
 
         task.on('close', () => {
-          glob(join(__dirname, '../../.tmp/dist', '**/*'), null, function (error, files) {
+          glob(join(__dirname, '../../.tmp/dist', '**/*')).then(files => {
             expect(files).to.deep.equal(expectedFilesForWatch('full-example'));
             done();
-          });
+          }).catch(done);
         });
 
         setTimeout(() => {
