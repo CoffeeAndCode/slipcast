@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 const { expect } = require('chai');
-const mkdirp = require('mkdirp');
+const { ensureDirSync } = require('fs-extra');
 const { afterEach, beforeEach, describe, it } = require('mocha');
 const pkg = require('../../global-cli/package.json');
 const { join } = require('path');
@@ -17,7 +17,7 @@ describe('global-cli', function() {
     beforeEach(createTmpDirectory);
 
     it('will show an error message if directory already exists', function(done) {
-      mkdirp.sync(join(__dirname, '../../.tmp/new-project'));
+      ensureDirSync(join(__dirname, '../../.tmp/new-project'));
 
       exec(`${join(__dirname, '../../global-cli', pkg.bin)} new-project`, {
         cwd: join(__dirname, '../../.tmp')

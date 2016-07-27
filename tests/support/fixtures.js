@@ -1,15 +1,14 @@
 const { execSync } = require('child_process');
+const { ensureDirSync, removeSync } = require('fs-extra');
 const { join } = require('path');
-const mkdirp = require('mkdirp');
-const rimraf = require('rimraf');
 
 function clean() {
-  rimraf.sync(join(__dirname, '../../.tmp/'));
+  removeSync(join(__dirname, '../../.tmp'));
 }
 
 function createTmpDirectory() {
-  rimraf.sync(join(__dirname, '../../.tmp/'));
-  mkdirp.sync(join(__dirname, '../../.tmp'));
+  removeSync(join(__dirname, '../../.tmp'));
+  ensureDirSync(join(__dirname, '../../.tmp'));
 }
 
 function expectedAndCompressedFiles(fixtureName) {

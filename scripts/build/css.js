@@ -1,11 +1,11 @@
 'use strict';
 
 const config = require('../../config/slipcast');
+const { ensureDir } = require('fs-extra');
 const postcss = require('postcss');
 const cssImport = require('postcss-import');
 const cssnano = require('cssnano');
 const cssnext = require('postcss-cssnext');
-const mkdirp = require('mkdirp');
 const { readFile, writeFile } = require('fs');
 const { dirname, join } = require('path');
 
@@ -40,7 +40,7 @@ config.files.filter(file => {
   }).then(function (result) {
     const cssFilePath = join(config.output, file);
 
-    mkdirp(dirname(cssFilePath), function (error) {
+    ensureDir(dirname(cssFilePath), function (error) {
       if (error) { throw error; }
 
       writeFile(cssFilePath, result.css, error => {

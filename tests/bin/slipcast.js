@@ -3,6 +3,7 @@ const { afterEach, beforeEach, describe, it } = require('mocha');
 const { expect } = require('chai');
 const { exec, spawn } = require('child_process');
 const { readFileSync, writeFileSync } = require('fs');
+const { ensureDirSync, removeSync } = require('fs-extra');
 const glob = promisify(require('glob'));
 const { get } = require('http');
 const init = require('../../scripts/init');
@@ -11,8 +12,6 @@ const { runFromDirectory } = require('../support/process');
 const { join } = require('path');
 const pkg = require('../../package.json');
 const psTree = require('ps-tree');
-const mkdirp = require('mkdirp');
-const rimraf = require('rimraf');
 
 describe('CLI', function() {
   this.slow(2 * 1000);
@@ -22,7 +21,7 @@ describe('CLI', function() {
   describe('template without config', function() {
     beforeEach(loadFixture('barebones'));
     beforeEach(function() {
-      rimraf.sync(join(__dirname, '../../.tmp/slipcast.js'));
+      removeSync(join(__dirname, '../../.tmp/slipcast.js'));
     });
 
     it('will show an error if slipcast.js cannot be found for build command', function(done) {
@@ -58,7 +57,7 @@ describe('CLI', function() {
 
   describe('init', function() {
     beforeEach(function() {
-      mkdirp.sync(join(__dirname, '../../.tmp/'));
+      ensureDirSync(join(__dirname, '../../.tmp/'));
       const packageJson = {
         name: 'example',
         version: '0.0.1',

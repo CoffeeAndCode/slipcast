@@ -3,27 +3,29 @@
 const { spawn } = require('child_process');
 const config = require('../config/slipcast');
 const { mkdtempSync, writeFileSync } = require('fs');
-const mkdirp = require('mkdirp');
+const { emptyDirSync, ensureDir, removeSync } = require('fs-extra');
 const { tmpdir } = require('os');
 const { dirname, join } = require('path');
-const rimraf = require('rimraf');
 
 module.exports = function() {
   const config = require('../config/slipcast');
 
-  rimraf.sync(join(process.cwd(), config.output));
-  mkdirp.sync(join(process.cwd(), config.output));
+  ensureDir(join(process.cwd(), config.output), error => {
+    if (error) { throw error; }
 
-  const procfilePath = join(mkdtempSync(join(tmpdir(), 'slipcast-')), 'Procfile');
-  writeFileSync(procfilePath, procfileTemplate());
-  console.error(procfilePath);
+    emptyDirSync(join(process.cwd(), config.output));
 
-  spawn(require.resolve('foreman/nf'), ['start', '--procfile', procfilePath], { stdio: 'inherit' });
-  process.addListener('exit', function() {
-    rimraf.sync(dirname(procfilePath));
+    const procfilePath = join(mkdtempSync(join(tmpdir(), 'slipcast-')), 'Procfile');
+    writeFileSync(procfilePath, procfileTemplate());
+    console.error(procfilePath);
+
+    spawn(require.resolve('foreman/nf'), ['start', '--procfile', procfilePath], { stdio: 'inherit' });
+    process.addListener('exit', function() {
+      removeSync(dirname(procfilePath));
+    });
+    // This listener is required or our `exit` listener will never run.
+    process.addListener('SIGINT', () => null);
   });
-  // This listener is required or our `exit` listener will never run.
-  process.addListener('SIGINT', () => null);
 }
 
 function procfileTemplate() {
