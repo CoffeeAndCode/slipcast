@@ -2,7 +2,7 @@ const { spawn, spawnSync } = require('child_process');
 const { mkdirSync, statSync, writeFileSync } = require('fs');
 const { basename, join, resolve } = require('path');
 
-module.exports = function(name, verbose) {
+module.exports = function(name, verbose, node_modules=null) {
   try {
     statSync(name).isDirectory();
     console.error(`The directory \`${name}\` already exists. Aborting.`);
@@ -18,11 +18,11 @@ module.exports = function(name, verbose) {
   mkdirSync(projectDirectory);
 
   // hack to make tests run faster since the npm install takes so long
-  if (process.env.NODE_ENV === 'test') {
+  if (node_modules) {
     spawnSync('cp', [
       '-R',
-      join(__dirname, '../../node_modules/'),
-      join(__dirname, '../../.tmp', name, 'node_modules')
+      node_modules,
+      join(projectDirectory, 'node_modules')
     ], { stdio: 'inherit' });
   }
 

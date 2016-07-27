@@ -22,5 +22,5 @@ if (commands.help || process.argv.length === 2) {
   process.exit();
 
 } else {
-  createApp(commands._[0], commands.verbose);
+  createApp(commands._[0], commands.verbose, commands.node_modules);
 }
