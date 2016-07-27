@@ -1,3 +1,5 @@
+'use strict';
+
 const { execSync } = require('child_process');
 const { ensureDirSync, removeSync } = require('fs-extra');
 const { join } = require('path');

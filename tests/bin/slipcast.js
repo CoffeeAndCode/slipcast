@@ -1,3 +1,5 @@
+'use strict';
+
 const promisify = require('es6-promisify');
 const { afterEach, beforeEach, describe, it } = require('mocha');
 const { expect } = require('chai');

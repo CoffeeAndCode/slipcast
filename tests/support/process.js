@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports.runFromDirectory = function(directory, done, method) {
   const originalWorkingDirectory = process.cwd();
   process.chdir(directory);

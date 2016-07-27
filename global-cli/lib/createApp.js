@@ -1,3 +1,5 @@
+'use strict';
+
 const { spawn, spawnSync } = require('child_process');
 const { mkdirSync, statSync, writeFileSync } = require('fs');
 const { basename, join, resolve } = require('path');

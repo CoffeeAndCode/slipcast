@@ -1,3 +1,5 @@
+'use strict';
+
 // Example of registering an example Handlebars helper.
 const handlebars = require('handlebars');
 handlebars.registerHelper({
