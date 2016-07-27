@@ -25,6 +25,7 @@ config.files.filter(file => {
 
     if (process.env.NODE_ENV === 'production') {
       plugins.push(cssnano({
+        autoprefixer: false,
         discardComments: { removeAll: true }
       }));
     }
