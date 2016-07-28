@@ -2,7 +2,7 @@
 
 const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
-const config = require('../config/slipcast');
+const config = require('./slipcast');
 const { join } = require('path');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const uglify = require('rollup-plugin-uglify');

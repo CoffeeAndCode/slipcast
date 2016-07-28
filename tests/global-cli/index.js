@@ -43,10 +43,10 @@ describe('global-cli', function() {
       exec(`${join(__dirname, '../../global-cli', pkg.bin)} new-project --node_modules ${join(__dirname, '../../node_modules')}`, {
         cwd: join(__dirname, '../../.tmp')
       }, () => {
-        const package = require(join(__dirname, '../../.tmp/new-project/package.json'));
-        expect(package.name).to.eq('new-project');
-        expect(package.private).to.eq(true);
-        expect(package.version).to.eq('0.0.1');
+        const packageJson = require(join(__dirname, '../../.tmp/new-project/package.json'));
+        expect(packageJson.name).to.eq('new-project');
+        expect(packageJson.private).to.eq(true);
+        expect(packageJson.version).to.eq('0.0.1');
         done();
       });
     });
