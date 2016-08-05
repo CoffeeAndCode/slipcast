@@ -20,12 +20,12 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "eslint-config-coffeeandcode": "^0.2.0",
-    "mocha": "^2.5.3",
+    "mocha": "^3.0.1",
     "ps-tree": "^1.1.0"
   },
   "dependencies": {
     "babel-preset-es2015-rollup": "^1.1.1",
-    "browser-sync": "^2.11.1",
+    "browser-sync": "^2.14.0",
     "cssnano": "^3.7.3",
     "es6-promisify": "^4.1.0",
     "foreman": "^1.4.1",
@@ -40,10 +40,10 @@
     "postcss": "^5.1.1",
     "postcss-cssnext": "^2.7.0",
     "postcss-import": "^8.0.2",
-    "rollup": "^0.34.1",
+    "rollup": "^0.34.3",
     "rollup-plugin-babel": "^2.6.1",
     "rollup-plugin-commonjs": "^3.1.0",
-    "rollup-plugin-node-resolve": "^1.7.2",
+    "rollup-plugin-node-resolve": "^2.0.0",
     "rollup-plugin-uglify": "^1.0.1"
   }
 }
