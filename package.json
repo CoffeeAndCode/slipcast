@@ -36,6 +36,7 @@
     "metalsmith-in-place": "^1.4.4",
     "metalsmith-layouts": "^1.6.5",
     "minimist": "^1.2.0",
+    "node-sass": "^3.8.0",
     "nodemon": "^1.10.0",
     "postcss": "^5.1.1",
     "postcss-cssnext": "^2.7.0",

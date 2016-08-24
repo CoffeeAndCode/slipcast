@@ -7,16 +7,24 @@ const cssImport = require('postcss-import');
 const cssnano = require('cssnano');
 const cssnext = require('postcss-cssnext');
 const { readFile, writeFile } = require('fs');
-const { dirname, join } = require('path');
+const { dirname, extname, join } = require('path');
+const sass = require('node-sass');
 
 config.files.filter(file => {
-  return file.endsWith('.css');
+  return file.endsWith('.css') || file.endsWith('.scss');
 }).forEach(file => {
   return new Promise((resolve, reject) => {
     readFile(join(config.folders.css, file), { encoding: 'utf8' }, (err, data) => {
       if (err) { reject(err); }
       resolve(data);
     });
+  }).then(function(css) {
+    if (file.endsWith('.scss')) {
+      return sass.renderSync({
+        data: css
+      }).css;
+    }
+    return css;
   }).then(function(css) {
     const plugins = [
       cssImport(),
@@ -38,7 +46,7 @@ config.files.filter(file => {
       throw error;
     });
   }).then(function (result) {
-    const cssFilePath = join(config.output, file);
+    const cssFilePath = join(config.output, file.replace(extname(file), '.css'));
 
     ensureDir(dirname(cssFilePath), function (error) {
       if (error) { throw error; }
