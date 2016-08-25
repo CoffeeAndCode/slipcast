@@ -7,12 +7,14 @@ const cssImport = require('postcss-import');
 const cssnano = require('cssnano');
 const cssnext = require('postcss-cssnext');
 const { readFile, writeFile } = require('fs');
-const { dirname, extname, join } = require('path');
+const { dirname, extname, join, relative } = require('path');
 const sass = require('node-sass');
 
 config.files.filter(file => {
   return file.endsWith('.css') || file.endsWith('.scss');
 }).forEach(file => {
+  const cssFilePath = join(config.output, file.replace(extname(file), '.css'));
+
   return new Promise((resolve, reject) => {
     readFile(join(config.folders.css, file), { encoding: 'utf8' }, (err, data) => {
       if (err) { reject(err); }
@@ -21,11 +23,18 @@ config.files.filter(file => {
   }).then(function(css) {
     if (file.endsWith('.scss')) {
       return sass.renderSync({
-        data: css
-      }).css;
+        data: css,
+        file: join(config.folders.css, file),
+        includePaths: ['node_modules'],
+        outFile: cssFilePath,
+        sourceMap: true,
+        sourceMapContents: true,
+        sourceMapEmbed: true,
+        sourceMapRoot: relative(config.folders.css, config.output)
+      });
     }
     return css;
-  }).then(function(css) {
+  }, function(error) { console.error(error); }).then(function(css) {
     const plugins = [
       cssImport(),
       cssnext({ browsers: ['last 2 versions'] })
@@ -38,16 +47,14 @@ config.files.filter(file => {
       }));
     }
 
-    return postcss(plugins).process(css, {
+    return postcss(plugins).process(typeof css === 'object' ? css.css : css, {
       from: join(config.folders.css, file),
       to: join(config.output, file),
       map: { inline: false }
     }).catch(error => {
-      throw error;
+      console.error(error);
     });
-  }).then(function (result) {
-    const cssFilePath = join(config.output, file.replace(extname(file), '.css'));
-
+  }, function(error) { console.error(error); }).then(function (result) {
     ensureDir(dirname(cssFilePath), function (error) {
       if (error) { throw error; }
 
@@ -56,7 +63,7 @@ config.files.filter(file => {
       });
 
       if (result.map) {
-        writeFile(`${cssFilePath}.map`, result.map, error => {
+        writeFile(`${join(config.output, file)}.map`, result.map, error => {
           if (error) { throw error; }
         });
       }
