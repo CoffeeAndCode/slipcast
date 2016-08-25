@@ -14,7 +14,7 @@ describe('global-cli', function() {
 
   describe('create project', function() {
     this.slow(20000);
-    this.timeout(30000);
+    this.timeout(parseInt(process.env.TEST_TIMEOUT, 10) || 30000);
     afterEach(clean);
     beforeEach(createTmpDirectory);
 

@@ -17,7 +17,7 @@ const psTree = require('ps-tree');
 
 describe('CLI', function() {
   this.slow(2 * 1000);
-  this.timeout(20 * 1000);
+  this.timeout(parseInt(process.env.TEST_TIMEOUT, 10) || 20 * 1000);
   afterEach(clean);
 
   describe('template without config', function() {
