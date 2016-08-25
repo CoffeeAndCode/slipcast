@@ -5,6 +5,13 @@
 - nothing so far
 
 
+### 0.3.1 (August 24, 2016)
+
+- update template to include scss file in layouts
+- get sourcemaps working for scss files
+- allow environment variable `TEST_TIMEOUT` to allow tests to run longer
+
+
 ### 0.3.0 (August 24, 2016)
 
 - changed main script to the same name as the project
