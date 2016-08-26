@@ -9,18 +9,21 @@ config.files.filter(file => {
   return file.endsWith('.js');
 }).forEach(file => {
   rollup.rollup(rollupConfig(file)).then(function(bundle) {
-    bundle.write({
-      dest: join(config.output, file.replace(/\.js$/, '.es.js')),
-      format: 'es',
-      sourceMap: true
-    });
-
-    bundle.write({
-      dest: join(config.output, file.replace(/\.js$/, '.umd.js')),
-      format: 'umd',
-      sourceMap: true
+    Promise.all([
+      bundle.write({
+        dest: join(config.output, file.replace(/\.js$/, '.es.js')),
+        format: 'es',
+        sourceMap: true
+      }),
+      bundle.write({
+        dest: join(config.output, file.replace(/\.js$/, '.umd.js')),
+        format: 'umd',
+        sourceMap: true
+      })
+    ]).catch(function(error) {
+      console.error(error);
     });
   }).catch(function(error) {
-    throw error;
+    console.error(error);
   });
 });

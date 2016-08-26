@@ -22,16 +22,20 @@ config.files.filter(file => {
     });
   }).then(function(css) {
     if (file.endsWith('.scss')) {
-      return sass.renderSync({
-        data: css,
-        file: join(config.folders.css, file),
-        includePaths: ['node_modules'],
-        outFile: cssFilePath,
-        sourceMap: true,
-        sourceMapContents: true,
-        sourceMapEmbed: true,
-        sourceMapRoot: relative(config.folders.css, config.output)
-      });
+      try {
+        return sass.renderSync({
+          data: css,
+          file: join(config.folders.css, file),
+          includePaths: ['node_modules'],
+          outFile: cssFilePath,
+          sourceMap: true,
+          sourceMapContents: true,
+          sourceMapEmbed: true,
+          sourceMapRoot: relative(config.folders.css, config.output)
+        });
+      } catch(error) {
+        console.error(error);
+      }
     }
     return css;
   }, function(error) { console.error(error); }).then(function(css) {
@@ -51,7 +55,7 @@ config.files.filter(file => {
       from: join(config.folders.css, file),
       to: join(config.output, file),
       map: { inline: false }
-    }).catch(error => {
+    }).catch(function(error) {
       console.error(error);
     });
   }, function(error) { console.error(error); }).then(function (result) {
@@ -68,7 +72,7 @@ config.files.filter(file => {
         });
       }
     });
-  }).catch(function (error) {
-    throw error;
+  }).catch(function(error) {
+    console.error(error);
   });
 });
