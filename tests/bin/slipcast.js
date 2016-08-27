@@ -31,7 +31,7 @@ describe('CLI', function() {
         cwd: join(__dirname, '../../.tmp')
       }, (error, stdout, stderr) => {
         expect(stdout).to.equal('');
-        expect(stderr).to.equal("We could not find a slipcast.js file for your project. Are you in the right directory?\n");
+        expect(stderr).to.contain("We could not find a slipcast.js file for your project. Are you in the right directory?\n");
         done();
       });
     });
@@ -41,7 +41,7 @@ describe('CLI', function() {
         cwd: join(__dirname, '../../.tmp')
       }, (error, stdout, stderr) => {
         expect(stdout).to.equal('');
-        expect(stderr).to.equal("We could not find a slipcast.js file for your project. Are you in the right directory?\n");
+        expect(stderr).to.contain("We could not find a slipcast.js file for your project. Are you in the right directory?\n");
         done();
       });
     });
@@ -51,7 +51,7 @@ describe('CLI', function() {
         cwd: join(__dirname, '../../.tmp')
       }, (error, stdout, stderr) => {
         expect(stdout).to.equal('');
-        expect(stderr).to.equal("We could not find a slipcast.js file for your project. Are you in the right directory?\n");
+        expect(stderr).to.contain("We could not find a slipcast.js file for your project. Are you in the right directory?\n");
         done();
       });
     });
