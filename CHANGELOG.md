@@ -2,7 +2,9 @@
 
 ### latest
 
-- nothing so far
+- better error output for css / js build scripts
+- output error if slipcast config encounters an issue
+- allow consuming apps to access handlbars
 
 
 ### 0.3.1 (August 24, 2016)
