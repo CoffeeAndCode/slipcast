@@ -1,8 +1,13 @@
 'use strict';
 
 const config = require('../../config/slipcast');
+const handlebars = require('handlebars');
 const Metalsmith = require('metalsmith');
 const { join, parse } = require('path');
+
+if (config.handlebars) {
+  config.handlebars(handlebars);
+}
 
 Metalsmith.prototype.uses = function(plugins) {
   this.plugins.push.apply(this.plugins, plugins);

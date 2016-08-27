@@ -8,8 +8,9 @@ try {
   if (statSync(join(process.cwd(), 'slipcast.js')).isFile()) {
     config = require(join(process.cwd(), 'slipcast'));
   }
-} catch (exception) {
+} catch (error) {
   // ignore execption if file cannot be found
+  console.error(error);
   console.error('We could not find a slipcast.js file for your project. Are you in the right directory?');
   process.exit(1);
 }
