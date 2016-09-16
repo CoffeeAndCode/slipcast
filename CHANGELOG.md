@@ -5,9 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
-## [Unreleased] - hello
+## [Unreleased] - Unreleased
 ### Added
 - allow consuming apps to access handlbars
+- update dependencies
 
 ### Changed
 - better error output for css / js build scripts
