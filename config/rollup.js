@@ -8,6 +8,14 @@ const nodeResolve = require('rollup-plugin-node-resolve');
 const uglify = require('rollup-plugin-uglify');
 
 module.exports = function(file) {
+  const commonjsPluginConfig = {
+    include: 'node_modules/**'
+  };
+
+  if (config.rollup && config.rollup.commonjs) {
+    Object.assign(commonjsPluginConfig, config.rollup.commonjs);
+  }
+
   const rollupConfig = {
     entry: join(config.folders.javascript, file),
     plugins: [
@@ -16,9 +24,7 @@ module.exports = function(file) {
         main: true
       }),
 
-      commonjs({
-        include: 'node_modules/**'
-      }),
+      commonjs(commonjsPluginConfig),
 
       babel({
         babelrc: false,
