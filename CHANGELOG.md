@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - allow consuming apps to access handlbars
 - update dependencies
 - allow user config override of commonjs plugin config
+- add eject command
 
 ### Changed
 - better error output for css / js build scripts

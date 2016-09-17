@@ -18,6 +18,7 @@ run a webserver that watches for changes.
     "scripts": {
         "build": "slipcast",
         "compress": "slipcast --compress",
+        "eject": "slipcast --eject",
         "start": "slipcast --watch"
     }
 ...
@@ -50,17 +51,6 @@ module.exports = {
   },
   output: 'dist'
 };
-```
-
-Since the config file is an exported JavaScript module, you can run additional
-code in the same file. For example, you could register a custom Handlebars
-helper by placing the following in your `slipcast.js` file:
-
-```js
-const handlebars = require('handlebars');
-handlebars.registerHelper('capitalize', val => val.toUpperCase());
-
-// The module.exports section can go below...
 ```
 
 
