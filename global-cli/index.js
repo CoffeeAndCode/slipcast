@@ -1,26 +1,17 @@
 #!/usr/bin/env node
 'use strict';
 
-const createApp = require('./lib/createApp');
-const help = require('./lib/help');
-const minimist = require('minimist');
-const { version } = require('./package.json');
+const CLI = require('./lib/cli');
 
-const commands = minimist(process.argv.slice(2), {
-  alias: {
-    h: 'help',
-    v: 'version'
-  }
+const command = new CLI({
+  argv: process.argv.slice(2),
+  stderr: process.stderr,
+  stdin: process.stdin,
+  stdout: process.stdout
 });
 
-if (commands.help || process.argv.length === 2) {
-  console.log(help());
+command.run(function(error) {
+  if (!error) { return; }
+  console.error(error.message);
   process.exit(1);
-
-} else if (commands.version) {
-  console.log(version);
-  process.exit();
-
-} else {
-  createApp(commands._[0], commands.verbose, commands.node_modules);
-}
+});

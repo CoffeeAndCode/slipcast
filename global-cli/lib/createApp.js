@@ -4,28 +4,31 @@ const { spawn, spawnSync } = require('child_process');
 const { mkdirSync, statSync, writeFileSync } = require('fs');
 const { basename, join, resolve } = require('path');
 
-module.exports = function(name, verbose, node_modules=null) {
+module.exports = function(options) {
   try {
-    statSync(name).isDirectory();
-    console.error(`The directory \`${name}\` already exists. Aborting.`);
-    process.exit(1);
+    statSync(options.destination).isDirectory();
+    options.callback(new Error(`The directory \`${options.destination}\` already exists. Aborting.`));
+    return;
   } catch (exception) {
     // skip exception if folder can't be found
+    if (!exception.message.includes('ENOENT: no such file or directory')) {
+      throw exception;
+    }
   }
 
-  const projectDirectory = resolve(name);
+  const projectDirectory = resolve(options.destination);
   const appName = basename(projectDirectory);
 
-  console.log(`Creating a new Slipcast app in ${projectDirectory}.\n`);
+  options.log(`Creating a new Slipcast app in ${projectDirectory}.\n`);
   mkdirSync(projectDirectory);
 
   // hack to make tests run faster since the npm install takes so long
-  if (node_modules) {
+  if (options.nodeModules) {
     spawnSync('cp', [
       '-R',
-      node_modules,
+      options.nodeModules,
       join(projectDirectory, 'node_modules')
-    ], { stdio: 'inherit' });
+    ], { stdio: options.stdio });
   }
 
   const packageJson = {
@@ -36,27 +39,25 @@ module.exports = function(name, verbose, node_modules=null) {
   writeFileSync(join(projectDirectory, 'package.json'), JSON.stringify(packageJson, null, 2));
   process.chdir(projectDirectory);
 
-  console.log("Installing slipcast from npm. This might take a bit.\n");
+  options.log("Installing slipcast from npm. This might take a bit.\n");
 
-  run(projectDirectory, appName, verbose);
-}
-
-function run(projectDirectory, appName, verbose) {
   const args = [
     'install',
-    verbose && '--verbose',
+    options.verbose && '--verbose',
     '--save',
     'slipcast'
   ].filter(function(arg) { return arg; });
-  const task = spawn('npm', args, { stdio: 'inherit' });
+  const task = spawn('npm', args, { stdio: options.stdio });
 
   task.on('close', function (code) {
     if (code !== 0) {
-      console.error(`\`npm ${args.join(' ')}\' failed`);
-      process.exit(1);
+      options.callback(new Error(`\`npm ${args.join(' ')}\' failed`));
+      return;
     }
 
     const init = require(join(process.cwd(), 'node_modules/slipcast/scripts/init'));
-    init(projectDirectory, appName, verbose);
+    init(projectDirectory, appName, options.verbose).then(function() {
+      options.callback();
+    }).catch(options.callback);
   });
 }

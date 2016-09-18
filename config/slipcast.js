@@ -10,9 +10,11 @@ try {
   }
 } catch (error) {
   // ignore execption if file cannot be found
-  console.error(error);
-  console.error('We could not find a slipcast.js file for your project. Are you in the right directory?');
-  process.exit(1);
+  if (error.message.includes('ENOENT: no such file or directory')) {
+    console.error(error);
+    console.error('We could not find a slipcast.js file for your project. Are you in the right directory?');
+    process.exit(1);
+  }
 }
 
 // default values for slipcast config

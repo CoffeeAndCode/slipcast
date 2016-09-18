@@ -51,48 +51,4 @@ describe('global-cli', function() {
       });
     });
   });
-
-  describe('help', function() {
-    it('will return usage info with --help', function(done) {
-      exec(`${pkg.bin} --help`, {
-        cwd: join(__dirname, '../../global-cli/')
-      }, (error, stdout, stderr) => {
-        expect(stderr).to.equal('');
-        expect(stdout).to.contain(`A minimal config static website builder you can leave at anytime. (v${pkg.version})`);
-        done();
-      });
-    });
-
-    it('will return usage info with -h', function(done) {
-      exec(`${pkg.bin} -h`, {
-        cwd: join(__dirname, '../../global-cli/')
-      }, (error, stdout, stderr) => {
-        expect(stderr).to.equal('');
-        expect(stdout).to.contain(`A minimal config static website builder you can leave at anytime. (v${pkg.version})`);
-        done();
-      });
-    });
-  });
-
-  describe('version', function() {
-    it('will return the version number with --version', function(done) {
-      exec(`${pkg.bin} --version`, {
-        cwd: join(__dirname, '../../global-cli/')
-      }, (error, stdout, stderr) => {
-        expect(stderr).to.equal('');
-        expect(stdout).to.equal(`${pkg.version}\n`);
-        done();
-      });
-    });
-
-    it('will return the version number with -v', function(done) {
-      exec(`${pkg.bin} -v`, {
-        cwd: join(__dirname, '../../global-cli/')
-      }, (error, stdout, stderr) => {
-        expect(stderr).to.equal('');
-        expect(stdout).to.equal(`${pkg.version}\n`);
-        done();
-      });
-    });
-  });
 });
