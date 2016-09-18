@@ -19,6 +19,7 @@ module.exports = function(projectDirectory, appName, verbose) {
   packageJSON.scripts = {
     build: 'slipcast --build',
     compress: 'slipcast --compress',
+    eject: 'slipcast --eject',
     start: 'slipcast --watch'
   };
   const packageWritePromise = writeFile('package.json', JSON.stringify(packageJSON, null, 2));
