@@ -8,8 +8,8 @@
   "bin": "./bin/slipcast.js",
   "scripts": {
     "lint": "eslint bin config global-cli lib scripts tests",
-    "test": "mocha --bail --require tests/support/testHelper.js tests/**/*.js",
-    "test:ci": "mocha --require tests/support/testHelper.js tests/**/*.js"
+    "test": "mocha --bail --require tests/support/testHelper.js 'tests/!(fixtures)/**/*.js'",
+    "test:ci": "mocha --require tests/support/testHelper.js 'tests/!(fixtures)/**/*.js'"
   },
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",
