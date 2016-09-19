@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - update dependencies
 - allow user config override of commonjs plugin config
 - add eject command
+- slipcast-cli: rethrow exceptions not related to install directory check
 
 ### Changed
 - better error output for css / js build scripts
