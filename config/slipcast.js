@@ -14,6 +14,8 @@ try {
     console.error(error);
     console.error('We could not find a slipcast.js file for your project. Are you in the right directory?');
     process.exit(1);
+  } else {
+    throw error;
   }
 }
 
