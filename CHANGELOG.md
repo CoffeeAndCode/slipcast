@@ -6,17 +6,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [Unreleased] - Unreleased
+- nothing yet
+
+
+## [0.4.0] - 2016-09-19
 ### Added
 - allow consuming apps to access handlbars
-- update dependencies
 - allow user config override of commonjs plugin config
 - add eject command
 - slipcast-cli: rethrow exceptions not related to install directory check
 
 ### Changed
+- update dependencies
 - better error output for css / js build scripts
 - output error if slipcast config encounters an issue
 - updated changelog format and added semver notice
+- rethrow non-config file missing exceptions
 
 
 ## [0.3.1] - 2016-08-24
@@ -60,7 +65,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/v0.3.1...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/CoffeeAndCode/slipcast/compare/v0.3.1...v0.4.0
 [0.3.1]: https://github.com/CoffeeAndCode/slipcast/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/CoffeeAndCode/slipcast/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/CoffeeAndCode/slipcast/compare/v0.1.0...v0.2.0
