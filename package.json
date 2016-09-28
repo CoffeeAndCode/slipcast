@@ -29,7 +29,7 @@
     "babel-preset-es2015-rollup": "^1.2.0",
     "browser-sync": "^2.16.0",
     "cssnano": "^3.7.4",
-    "es6-promisify": "^4.1.0",
+    "es6-promisify": "^5.0.0",
     "foreman": "^2.0.0",
     "fs-extra": "^0.30.0",
     "glob": "^7.0.6",
