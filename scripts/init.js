@@ -30,7 +30,7 @@ module.exports = function(projectDirectory, appName, verbose) {
   const fileCopyPromise = new Promise((resolve, reject) => {
     glob(join(__dirname, '../template', '*'), null, function (error, files) {
       if (error) { reject(error); return; }
-
+      files.push(join(__dirname, '../template', '.gitignore'));
       Promise.all(files.map(path => {
         return copy(path, join(process.cwd(), basename(path)));
       })).then(resolve).catch(reject);
