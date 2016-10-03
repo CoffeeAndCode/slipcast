@@ -52,11 +52,3 @@ module.exports = {
   output: 'dist'
 };
 ```
-
-
-## Procfile
-
-This project will output a `Procfile` in the calling project's directory and
-will be overwritten each time `slipcast` is called. You can either
-add it to your project's `.gitignore` file or to the project itself. The contents
-will not change unless your `slipcast.js` configuration changes.
