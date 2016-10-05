@@ -1,14 +1,12 @@
-'use strict';
-
 const { writeFileSync } = require('fs');
 const { copySync, removeSync } = require('fs-extra');
 const { join } = require('path');
 const prompt = require('../lib/prompt');
 
-module.exports = function() {
+module.exports = () => {
   console.log('You are about to eject from slipcast. This action is irreversible.');
 
-  prompt('Would you like to continue?').then(function(proceed) {
+  prompt('Would you like to continue?').then((proceed) => {
     if (!proceed) {
       console.log('Eject aborted.');
       process.exit(1);
@@ -31,7 +29,7 @@ module.exports = function() {
     const clientPackage = require(join(process.cwd(), 'package.json'));
     const libraryPackage = require(join(__dirname, '..', 'package.json'));
 
-    Object.keys(clientPackage.scripts).forEach(key => {
+    Object.keys(clientPackage.scripts).forEach((key) => {
       clientPackage.scripts[key] = clientPackage.scripts[key].replace(/slipcast --(\w+)/g, 'node -e \'require("./scripts/$1")();\'');
     });
     delete clientPackage.scripts.eject;
@@ -46,4 +44,4 @@ module.exports = function() {
 
     console.log('Eject completd successfully.');
   });
-}
+};

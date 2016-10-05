@@ -1,5 +1,3 @@
-'use strict';
-
 const { statSync } = require('fs');
 const { join } = require('path');
 
@@ -24,8 +22,8 @@ const defaults = {
   build: {
     html: {
       afterPlugins: [],
-      beforePlugins: []
-    }
+      beforePlugins: [],
+    },
   },
   files: [],
   folders: {
@@ -33,9 +31,9 @@ const defaults = {
     javascript: 'app/js',
     pages: 'app/pages',
     static: 'app/static',
-    views: 'app/views'
+    views: 'app/views',
   },
-  output: 'dist'
+  output: 'dist',
 };
 
 module.exports = Object.assign(defaults, config);

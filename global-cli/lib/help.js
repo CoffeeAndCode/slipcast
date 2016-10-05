@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = function() {
+module.exports = () => {
   const { version } = require('../package.json');
 
   return `

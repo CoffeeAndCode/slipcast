@@ -1,5 +1,3 @@
-'use strict';
-
 const promisify = require('es6-promisify');
 const fs = require('fs');
 const writeFile = promisify(fs.writeFile);
@@ -8,7 +6,7 @@ const copy = promisify(fse.copy);
 const glob = require('glob');
 const { basename, join } = require('path');
 
-module.exports = function(projectDirectory, appName, verbose) {
+module.exports = (projectDirectory, appName, verbose) => {
   if (verbose) {
     console.log(`Creating project for ${appName} in ${projectDirectory}...`);
     console.log(`Running from ${process.cwd()}`);
@@ -20,7 +18,7 @@ module.exports = function(projectDirectory, appName, verbose) {
     build: 'slipcast --build',
     compress: 'slipcast --compress',
     eject: 'slipcast --eject',
-    start: 'slipcast --watch'
+    start: 'slipcast --watch',
   };
   const packageWritePromise = writeFile('package.json', JSON.stringify(packageJSON, null, 2));
 
@@ -28,14 +26,16 @@ module.exports = function(projectDirectory, appName, verbose) {
     console.log('Copying template into your project');
   }
   const fileCopyPromise = new Promise((resolve, reject) => {
-    glob(join(__dirname, '../template', '*'), null, function (error, files) {
-      if (error) { reject(error); return; }
+    glob(join(__dirname, '../template', '*'), null, (error, files) => {
+      if (error) {
+        reject(error);
+        return;
+      }
       files.push(join(__dirname, '../template', '.gitignore'));
-      Promise.all(files.map(path => {
-        return copy(path, join(process.cwd(), basename(path)));
-      })).then(resolve).catch(reject);
+      Promise.all(files.map(path => copy(path, join(process.cwd(), basename(path)))))
+        .then(resolve).catch(reject);
     });
   });
 
   return Promise.all([fileCopyPromise, packageWritePromise]);
-}
+};

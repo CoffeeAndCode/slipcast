@@ -1,11 +1,9 @@
-'use strict';
-
-module.exports.runFromDirectory = function(directory, done, method) {
+module.exports.runFromDirectory = function runFromDirectory(directory, done, method) {
   const originalWorkingDirectory = process.cwd();
   process.chdir(directory);
 
-  method.call(null, function() {
+  method.call(null, (...args) => {
     process.chdir(originalWorkingDirectory);
-    done.apply(null, arguments);
+    done(...args);
   });
-}
+};
