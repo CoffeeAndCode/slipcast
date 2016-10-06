@@ -1,3 +1,5 @@
+'use strict';
+
 const { spawn, spawnSync } = require('child_process');
 const { mkdirSync, statSync, writeFileSync } = require('fs');
 const { basename, join, resolve } = require('path');
@@ -53,6 +55,7 @@ module.exports = (options) => {
       return;
     }
 
+    // eslint-disable-next-line global-require, import/no-dynamic-require
     const init = require(join(process.cwd(), 'node_modules/slipcast/scripts/init'));
     init(projectDirectory, appName, options.verbose).then(() => {
       options.callback();

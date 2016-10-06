@@ -1,3 +1,5 @@
+'use strict';
+
 const concat = require('concat-stream');
 const pkg = require('../../../global-cli/package.json');
 const proxyquire = require('proxyquire');
@@ -14,8 +16,8 @@ const CLI = proxyquire('../../../global-cli/lib/cli', {
 
 describe('cli', () => {
   describe('help', () => {
-    const expectHelpOutputForArgs = (argv) => {
-      return new Promise((resolve) => {
+    const expectHelpOutputForArgs = argv =>
+      new Promise((resolve) => {
         const stdout = new PassThrough();
         const cli = new CLI({
           argv,
@@ -33,7 +35,6 @@ describe('cli', () => {
           resolve();
         }));
       });
-    };
 
     it('will be displayed if nothing passed', () => expectHelpOutputForArgs([]));
 

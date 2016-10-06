@@ -1,11 +1,12 @@
+'use strict';
+
 const { spawn } = require('child_process');
 const { readdir } = require('fs');
 const { copy, emptyDirSync, ensureDir } = require('fs-extra');
 const { join } = require('path');
+const config = require('../config/slipcast');
 
 module.exports = () => {
-  const config = require('../config/slipcast');
-
   const outputFolder = join(process.cwd(), config.output);
 
   ensureDir(outputFolder, (error) => {
@@ -15,7 +16,7 @@ module.exports = () => {
 
     emptyDirSync(outputFolder);
 
-    readdir(join(process.cwd(), config.folders.static), (error, files) => {
+    readdir(join(process.cwd(), config.folders.static), (readDirError, files) => {
       files.forEach(file => copy(
         join(process.cwd(), config.folders.static, file),
         join(outputFolder, file)));

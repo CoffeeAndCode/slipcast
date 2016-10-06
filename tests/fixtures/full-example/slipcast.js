@@ -15,9 +15,9 @@ module.exports = {
       // Need to add custom metadata before plugins run so it's available
       // for Handlebars rendering of pages.
       beforePlugins: [
-        function (files, metalsmith, done) {
+        (files, metalsmith, done) => {
           Object.keys(files).forEach((file) => {
-            files[file].pageSpecificMessage = `I am ${file}`;
+            files[file].pageSpecificMessage = `I am ${file}`; // eslint-disable-line no-param-reassign
           });
           done();
         },

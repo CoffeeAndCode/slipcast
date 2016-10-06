@@ -1,5 +1,9 @@
+'use strict';
+
+const pkg = require('../package.json');
+
 module.exports = () => {
-  const { version } = require('../package.json');
+  const { version } = pkg;
 
   return `
  _______  ___      ___   _______  _______  _______  _______  _______

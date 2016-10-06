@@ -1,3 +1,5 @@
+'use strict';
+
 const createApp = require('../../../global-cli/lib/createApp');
 const { expect } = require('chai');
 const { afterEach, describe, it } = require('mocha');

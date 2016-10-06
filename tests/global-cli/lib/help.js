@@ -1,3 +1,5 @@
+'use strict';
+
 const help = require('../../../global-cli/lib/help');
 const { expect } = require('chai');
 const { describe, it } = require('mocha');

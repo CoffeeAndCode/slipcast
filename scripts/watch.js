@@ -1,3 +1,5 @@
+'use strict';
+
 const { spawn } = require('child_process');
 const config = require('../config/slipcast');
 const { mkdtempSync, writeFileSync } = require('fs');
@@ -32,5 +34,3 @@ module.exports = () => {
     process.addListener('SIGINT', () => null);
   });
 };
-
-

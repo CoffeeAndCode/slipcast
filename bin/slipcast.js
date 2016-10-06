@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 const build = require('../scripts/build');
 const compress = require('../scripts/compress');
 const eject = require('../scripts/eject');

@@ -1,3 +1,5 @@
+'use strict';
+
 const config = require('../../config/slipcast');
 const { ensureDir } = require('fs-extra');
 const postcss = require('postcss');

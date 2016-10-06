@@ -1,3 +1,5 @@
+'use strict';
+
 const promisify = require('es6-promisify');
 const { afterEach, beforeEach, describe, it } = require('mocha');
 const { expect } = require('chai');
@@ -13,7 +15,7 @@ const { join } = require('path');
 const pkg = require('../../package.json');
 const psTree = require('ps-tree');
 
-describe('CLI', () => {
+describe('CLI', function testCLI() {
   this.slow(2 * 1000);
   this.timeout(parseInt(process.env.TEST_TIMEOUT, 10) || 20 * 1000);
   afterEach(clean);
@@ -63,6 +65,7 @@ describe('CLI', () => {
         version: '0.0.1',
         private: true,
         dependencies: {
+          // eslint-disable-next-line global-require, import/no-dynamic-require
           slipcast: require(join(__dirname, '../../package.json')).version,
         },
       };
@@ -138,9 +141,9 @@ describe('CLI', () => {
 
           exec(`${join(__dirname, '../../', pkg.bin)} -c`, {
             cwd: join(__dirname, '../../.tmp'),
-          }, (error, stdout, stderr) => {
-            expect(stdout).to.equal('');
-            expect(stderr).to.equal('');
+          }, (execError, exexStdout, execStderr) => {
+            expect(exexStdout).to.equal('');
+            expect(execStderr).to.equal('');
 
             glob(join(__dirname, '../../.tmp/dist', '**/*')).then((files) => {
               expect(files).to.deep.equal(expectedAndCompressedFiles('barebones'));
@@ -159,9 +162,9 @@ describe('CLI', () => {
 
           exec(`${join(__dirname, '../../', pkg.bin)} --compress`, {
             cwd: join(__dirname, '../../.tmp'),
-          }, (error, stdout, stderr) => {
-            expect(stdout).to.equal('');
-            expect(stderr).to.equal('');
+          }, (execError, exexStdout, execStderr) => {
+            expect(exexStdout).to.equal('');
+            expect(execStderr).to.equal('');
 
             glob(join(__dirname, '../../.tmp/dist', '**/*')).then((files) => {
               expect(files).to.deep.equal(expectedAndCompressedFiles('barebones'));
@@ -307,7 +310,7 @@ describe('CLI', () => {
 
       it('will build files in the provided destination with -b', (done) => {
         exec(`${join(__dirname, '../../', pkg.bin)} -b`, {
-          cwd: join(__dirname, '../../.tmp')
+          cwd: join(__dirname, '../../.tmp'),
         }, (error, stdout, stderr) => {
           expect(stdout).to.equal('');
           expect(stderr).to.equal('');
@@ -357,9 +360,9 @@ describe('CLI', () => {
 
           exec(`${join(__dirname, '../../', pkg.bin)} -c`, {
             cwd: join(__dirname, '../../.tmp'),
-          }, (error, stdout, stderr) => {
-            expect(stdout).to.equal('');
-            expect(stderr).to.equal('');
+          }, (execError, exexStdout, execStderr) => {
+            expect(exexStdout).to.equal('');
+            expect(execStderr).to.equal('');
 
             glob(join(__dirname, '../../.tmp/dist', '**/*')).then((files) => {
               expect(files).to.deep.equal(expectedAndCompressedFiles('full-example'));
@@ -378,9 +381,9 @@ describe('CLI', () => {
 
           exec(`${join(__dirname, '../../', pkg.bin)} --compress`, {
             cwd: join(__dirname, '../../.tmp'),
-          }, (error, stdout, stderr) => {
-            expect(stdout).to.equal('');
-            expect(stderr).to.equal('');
+          }, (execError, exexStdout, execStderr) => {
+            expect(exexStdout).to.equal('');
+            expect(execStderr).to.equal('');
 
             glob(join(__dirname, '../../.tmp/dist', '**/*')).then((files) => {
               expect(files).to.deep.equal(expectedAndCompressedFiles('full-example'));

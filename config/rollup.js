@@ -1,3 +1,5 @@
+'use strict';
+
 const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
 const config = require('./slipcast');
@@ -27,7 +29,7 @@ module.exports = (file) => {
       babel({
         babelrc: false,
         exclude: 'node_modules/**',
-        presets: [require.resolve('babel-preset-es2015-rollup')]
+        presets: [require.resolve('babel-preset-es2015-rollup')],
       }),
     ],
   };

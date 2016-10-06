@@ -1,9 +1,12 @@
+'use strict';
+
 const { statSync } = require('fs');
 const { join } = require('path');
 
 let config = {};
 try {
   if (statSync(join(process.cwd(), 'slipcast.js')).isFile()) {
+    // eslint-disable-next-line global-require, import/no-dynamic-require
     config = require(join(process.cwd(), 'slipcast'));
   }
 } catch (error) {

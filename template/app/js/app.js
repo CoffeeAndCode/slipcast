@@ -1,3 +1,3 @@
-import answer from './deep/module.js';
+import answer from './deep/module';
 
 window.console.log(`The answer is ${answer}.`);

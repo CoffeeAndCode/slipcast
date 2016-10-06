@@ -1,3 +1,15 @@
 {
-  "extends": "airbnb"
+  "env": {
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": "airbnb",
+  "parserOptions": {
+    "sourceType": "script"
+  },
+  "rules": {
+    "no-console": ["error", { "allow": ["error", "log", "warn"] }],
+    "strict": ["error", "safe"]
+  }
 }

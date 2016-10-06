@@ -1,3 +1,5 @@
+'use strict';
+
 const { writeFileSync } = require('fs');
 const { copySync, removeSync } = require('fs-extra');
 const { join } = require('path');
@@ -26,7 +28,9 @@ module.exports = () => {
     console.log('- removing init script');
     removeSync(join(process.cwd(), 'scripts', 'init.js'));
 
+    // eslint-disable-next-line global-require, import/no-dynamic-require
     const clientPackage = require(join(process.cwd(), 'package.json'));
+    // eslint-disable-next-line global-require, import/no-dynamic-require
     const libraryPackage = require(join(__dirname, '..', 'package.json'));
 
     Object.keys(clientPackage.scripts).forEach((key) => {

@@ -1,3 +1,5 @@
+'use strict';
+
 const { exec } = require('child_process');
 const { expect } = require('chai');
 const { ensureDirSync } = require('fs-extra');
@@ -6,11 +8,11 @@ const pkg = require('../../global-cli/package.json');
 const { join } = require('path');
 const { clean, createTmpDirectory } = require('../support/fixtures');
 
-describe('global-cli', () => {
+describe('global-cli', function testGlobalCLI() {
   this.slow(500);
   this.timeout(1000);
 
-  describe('create project', () => {
+  describe('create project', function testCreateProject() {
     this.slow(20000);
     this.timeout(parseInt(process.env.TEST_TIMEOUT, 10) || 30000);
     afterEach(clean);
@@ -39,8 +41,9 @@ describe('global-cli', () => {
 
     it('will create a package.json file for the app', (done) => {
       exec(`${join(__dirname, '../../global-cli', pkg.bin)} new-project --node_modules ${join(__dirname, '../../node_modules')}`, {
-        cwd: join(__dirname, '../../.tmp')
+        cwd: join(__dirname, '../../.tmp'),
       }, () => {
+        // eslint-disable-next-line global-require, import/no-dynamic-require
         const packageJson = require(join(__dirname, '../../.tmp/new-project/package.json'));
         expect(packageJson.name).to.eq('new-project');
         expect(packageJson.private).to.eq(true);

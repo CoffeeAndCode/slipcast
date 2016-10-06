@@ -1,10 +1,13 @@
+'use strict';
+
 const promisify = require('es6-promisify');
 const fs = require('fs');
-const writeFile = promisify(fs.writeFile);
 const fse = require('fs-extra');
-const copy = promisify(fse.copy);
 const glob = require('glob');
 const { basename, join } = require('path');
+
+const copy = promisify(fse.copy);
+const writeFile = promisify(fs.writeFile);
 
 module.exports = (projectDirectory, appName, verbose) => {
   if (verbose) {
@@ -13,6 +16,7 @@ module.exports = (projectDirectory, appName, verbose) => {
     console.log('Updating package.json scripts');
   }
 
+  // eslint-disable-next-line global-require, import/no-dynamic-require
   const packageJSON = require(join(process.cwd(), 'package.json'));
   packageJSON.scripts = {
     build: 'slipcast --build',

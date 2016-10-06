@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 const CLI = require('./lib/cli');
 
 const command = new CLI({
@@ -11,6 +13,6 @@ const command = new CLI({
 
 command.run((error) => {
   if (!error) { return; }
-  // console.error(error.message);
+  console.error(error.message);
   process.exit(1);
 });

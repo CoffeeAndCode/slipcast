@@ -1,3 +1,5 @@
+'use strict';
+
 const { execSync } = require('child_process');
 const { ensureDirSync, removeSync } = require('fs-extra');
 const { join } = require('path');
@@ -14,8 +16,10 @@ function createTmpDirectory() {
 function expectedFiles(fixtureName) {
   const processDir = process.cwd();
   process.chdir(join(__dirname, '../../.tmp'));
+  // eslint-disable-next-line global-require, import/no-dynamic-require
   const config = require(join(__dirname, '../../config/slipcast'));
   process.chdir(processDir);
+  // eslint-disable-next-line global-require, import/no-dynamic-require
   const testData = require(join(__dirname, '../fixtures', fixtureName, 'test.json'));
   return testData.expectedFiles.sort().map(file => join(__dirname, '../../.tmp', config.output, file));
 }
@@ -32,8 +36,10 @@ function expectedAndCompressedFiles(fixtureName) {
 function expectedFilesForWatch(fixtureName) {
   const processDir = process.cwd();
   process.chdir(join(__dirname, '../../.tmp'));
+  // eslint-disable-next-line global-require, import/no-dynamic-require
   const config = require(join(__dirname, '../../config/slipcast'));
   process.chdir(processDir);
+  // eslint-disable-next-line global-require, import/no-dynamic-require
   const testData = require(join(__dirname, '../fixtures', fixtureName, 'test.json'));
   return testData.expectedFilesForWatch.sort().map(file =>
     join(__dirname, '../../.tmp', config.output, file)

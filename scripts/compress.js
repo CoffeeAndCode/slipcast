@@ -1,3 +1,5 @@
+'use strict';
+
 const config = require('../config/slipcast');
 const { readFile, writeFile } = require('fs');
 const glob = require('glob');
