@@ -1,5 +1,3 @@
-'use strict';
-
 const babel = require('rollup-plugin-babel');
 const commonjs = require('rollup-plugin-commonjs');
 const config = require('./slipcast');
@@ -7,9 +5,9 @@ const { join } = require('path');
 const nodeResolve = require('rollup-plugin-node-resolve');
 const uglify = require('rollup-plugin-uglify');
 
-module.exports = function(file) {
+module.exports = (file) => {
   const commonjsPluginConfig = {
-    include: 'node_modules/**'
+    include: 'node_modules/**',
   };
 
   if (config.rollup && config.rollup.commonjs) {
@@ -21,7 +19,7 @@ module.exports = function(file) {
     plugins: [
       nodeResolve({
         jsnext: true,
-        main: true
+        main: true,
       }),
 
       commonjs(commonjsPluginConfig),
@@ -30,8 +28,8 @@ module.exports = function(file) {
         babelrc: false,
         exclude: 'node_modules/**',
         presets: [require.resolve('babel-preset-es2015-rollup')]
-      })
-    ]
+      }),
+    ],
   };
 
   if (process.env.NODE_ENV === 'production') {
@@ -39,4 +37,5 @@ module.exports = function(file) {
   }
 
   return rollupConfig;
-}
+};
+

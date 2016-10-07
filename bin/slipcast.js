@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-'use strict';
 
 const build = require('../scripts/build');
 const compress = require('../scripts/compress');
@@ -11,8 +10,8 @@ const command = minimist(process.argv.slice(2), {
   alias: {
     b: 'build',
     c: 'compress',
-    w: 'watch'
-  }
+    w: 'watch',
+  },
 });
 
 if (process.argv.length <= 2 || command.build) {
