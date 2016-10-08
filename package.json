@@ -30,7 +30,8 @@
     "ps-tree": "^1.1.0"
   },
   "dependencies": {
-    "babel-preset-es2015-rollup": "^1.2.0",
+    "babel-plugin-external-helpers": "^6.8.0",
+    "babel-preset-es2015": "^6.16.0",
     "browser-sync": "^2.16.0",
     "cssnano": "^3.7.4",
     "es6-promisify": "^5.0.0",
