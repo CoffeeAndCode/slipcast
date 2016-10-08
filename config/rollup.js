@@ -29,7 +29,14 @@ module.exports = (file) => {
       babel({
         babelrc: false,
         exclude: 'node_modules/**',
-        presets: [require.resolve('babel-preset-es2015-rollup')],
+        plugins: [
+          require.resolve('babel-plugin-external-helpers'),
+        ],
+        presets: [
+          [require.resolve('babel-preset-es2015'), {
+            modules: false,
+          }],
+        ],
       }),
     ],
   };
