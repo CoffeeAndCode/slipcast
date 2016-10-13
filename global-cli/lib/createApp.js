@@ -1,6 +1,6 @@
 'use strict';
 
-const { spawn, spawnSync } = require('child_process');
+const { spawn } = require('child_process');
 const { mkdirSync, statSync, writeFileSync } = require('fs');
 const { basename, join, resolve } = require('path');
 
@@ -22,15 +22,6 @@ module.exports = (options) => {
   options.log(`Creating a new Slipcast app in ${projectDirectory}.\n`);
   mkdirSync(projectDirectory);
 
-  // hack to make tests run faster since the npm install takes so long
-  if (options.nodeModules) {
-    spawnSync('cp', [
-      '-R',
-      options.nodeModules,
-      join(projectDirectory, 'node_modules'),
-    ], { stdio: options.stdio });
-  }
-
   const packageJson = {
     name: appName,
     version: '0.0.1',
@@ -41,24 +32,33 @@ module.exports = (options) => {
 
   options.log('Installing slipcast from npm. This might take a bit.\n');
 
-  const args = [
-    'install',
-    options.verbose && '--verbose',
-    '--save',
-    'slipcast',
-  ].filter(arg => arg);
-  const task = spawn('npm', args, { stdio: options.stdio });
+  const installCommands = {
+    npm: 'npm install --save slipcast',
+    yarn: 'yarn add slipcast',
+  };
 
-  task.on('close', (code) => {
-    if (code !== 0) {
-      options.callback(new Error(`\`npm ${args.join(' ')}\' failed`));
-      return;
-    }
+  spawn('type', ['yarn'], { stdio: 'ignore' })
+    .on('close', (code) => {
+      let installCommand = installCommands.npm;
+      if (code === 0) {
+        installCommand = installCommands.yarn;
+      }
 
-    // eslint-disable-next-line global-require, import/no-dynamic-require
-    const init = require(join(process.cwd(), 'node_modules/slipcast/scripts/init'));
-    init(projectDirectory, appName, options.verbose).then(() => {
-      options.callback();
-    }).catch(options.callback);
-  });
+      const [command, ...args] = installCommand.split(' ').concat(options.verbose && '--verbose').filter(arg => arg);
+      const task = spawn(command, args, { stdio: options.stdio });
+
+      task.on('close', (installCode) => {
+        if (installCode !== 0) {
+          options.callback(new Error(`\`${command} ${args.join(' ')}\' failed`));
+          return;
+        }
+
+        // eslint-disable-next-line global-require, import/no-dynamic-require
+        const init = require(join(process.cwd(), 'node_modules/slipcast/scripts/init'));
+        init(projectDirectory, appName, options.verbose).then(() => {
+          options.callback();
+        }).catch(options.callback);
+      });
+    })
+    .on('error', console.error);
 };

@@ -40,7 +40,6 @@ class CLI {
       callback,
       destination: commands._[0],
       log: this.log.bind(this),
-      nodeModules: commands.node_modules,
       stdio: [this.stdin, this.stdout, this.stderr],
       verbose,
     });
