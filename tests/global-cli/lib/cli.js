@@ -99,20 +99,6 @@ describe('cli', () => {
       });
     });
 
-    it('will be passed the node_modules flag', (done) => {
-      const cli = new CLI({
-        argv: ['some/new/folder', '--node_modules', 'blah/blah'],
-        stdin: new PassThrough(),
-        stdout: new PassThrough(),
-        stderr: new PassThrough(),
-      });
-
-      cli.run((error, options) => {
-        expect(options.nodeModules).to.be.eq('blah/blah');
-        done();
-      });
-    });
-
     it('will be passed stdio from the CLI', (done) => {
       const stdio = [
         new PassThrough(),
