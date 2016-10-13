@@ -1,6 +1,6 @@
 'use strict';
 
-const { spawn } = require('child_process');
+const spawn = require('./spawn');
 const { mkdirSync, statSync, writeFileSync } = require('fs');
 const { basename, join, resolve } = require('path');
 
@@ -59,6 +59,12 @@ module.exports = (options) => {
           options.callback();
         }).catch(options.callback);
       });
+
+      task.on('error', (error) => {
+        options.stdio[2].write(`${error.toString()}\n`);
+      });
     })
-    .on('error', console.error);
+    .on('error', (error) => {
+      options.stdio[2].write(`${error.toString()}\n`);
+    });
 };
