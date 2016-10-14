@@ -3,10 +3,13 @@
 const { spawn } = require('child_process');
 
 module.exports.commandExists = function commandExists(command) {
-  const isWindows = process.platform.substring(0, 3) === 'win';
+  const isWindows = process.platform === 'win32';
 
   return new Promise((resolve) => {
-    spawn(isWindows ? 'where' : 'type', [command], { stdio: 'ignore' })
+    spawn(isWindows ? 'where' : 'type', [command], {
+      shell: true,
+      stdio: 'ignore',
+    })
       .on('close', (code) => {
         resolve(code === 0);
       })
