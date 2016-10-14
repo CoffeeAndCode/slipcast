@@ -13,8 +13,8 @@ describe('global-cli', function testGlobalCLI() {
   this.timeout(1000);
 
   describe('create project', function testCreateProject() {
-    this.slow(20000);
-    this.timeout(parseInt(process.env.TEST_TIMEOUT, 10) || 30000);
+    this.slow(30000);
+    this.timeout(parseInt(process.env.TEST_TIMEOUT, 10) || 40000);
     afterEach(clean);
     beforeEach(createTmpDirectory);
 
