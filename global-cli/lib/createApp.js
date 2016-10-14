@@ -1,8 +1,9 @@
 'use strict';
 
-const spawn = require('./spawn');
+const { spawn } = require('child_process');
 const { mkdirSync, statSync, writeFileSync } = require('fs');
 const { basename, join, resolve } = require('path');
+const { commandExists } = require('./platform');
 
 module.exports = (options) => {
   try {
@@ -37,34 +38,30 @@ module.exports = (options) => {
     yarn: 'yarn add slipcast',
   };
 
-  spawn('type', ['yarn'], { stdio: 'ignore' })
-    .on('close', (code) => {
-      let installCommand = installCommands.npm;
-      if (code === 0) {
-        installCommand = installCommands.yarn;
+  commandExists('yarn').then((result) => {
+    const installCommand = result ? installCommands.yarn : installCommands.npm;
+
+    const [command, ...args] = installCommand.split(' ').concat(options.verbose && '--verbose').filter(arg => arg);
+    const task = spawn(command, args, {
+      shell: process.platform === 'win32',
+      stdio: options.stdio,
+    });
+
+    task.on('close', (installCode) => {
+      if (installCode !== 0) {
+        options.callback(new Error(`\`${command} ${args.join(' ')}\' failed`));
+        return;
       }
 
-      const [command, ...args] = installCommand.split(' ').concat(options.verbose && '--verbose').filter(arg => arg);
-      const task = spawn(command, args, { stdio: options.stdio });
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      const init = require(join(process.cwd(), 'node_modules/slipcast/scripts/init'));
+      init(projectDirectory, appName, options.verbose).then(() => {
+        options.callback();
+      }).catch(options.callback);
+    });
 
-      task.on('close', (installCode) => {
-        if (installCode !== 0) {
-          options.callback(new Error(`\`${command} ${args.join(' ')}\' failed`));
-          return;
-        }
-
-        // eslint-disable-next-line global-require, import/no-dynamic-require
-        const init = require(join(process.cwd(), 'node_modules/slipcast/scripts/init'));
-        init(projectDirectory, appName, options.verbose).then(() => {
-          options.callback();
-        }).catch(options.callback);
-      });
-
-      task.on('error', (error) => {
-        options.stdio[2].write(`${error.toString()}\n`);
-      });
-    })
-    .on('error', (error) => {
+    task.on('error', (error) => {
       options.stdio[2].write(`${error.toString()}\n`);
     });
+  });
 };
