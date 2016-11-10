@@ -49,7 +49,7 @@ module.exports = (options) => {
 
     task.on('close', (installCode) => {
       if (installCode !== 0) {
-        options.callback(new Error(`\`${command} ${args.join(' ')}\' failed`));
+        options.callback(new Error(`\`${command} ${args.join(' ')}' failed`));
         return;
       }
 
