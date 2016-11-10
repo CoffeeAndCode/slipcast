@@ -3129,7 +3129,7 @@ metalsmith-layouts@^1.6.5:
     lodash.omit "^4.0.2"
     multimatch "^2.0.0"
 
-metalsmith@^2.2.0:
+metalsmith@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/metalsmith/-/metalsmith-2.3.0.tgz#833afbb5a2a6385e2d9ae3d935e39e33eaea5231"
   dependencies:
