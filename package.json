@@ -39,7 +39,7 @@
     "fs-extra": "^1.0.0",
     "glob": "^7.0.6",
     "handlebars": "^4.0.5",
-    "metalsmith": "^2.2.0",
+    "metalsmith": "^2.3.0",
     "metalsmith-in-place": "^1.4.4",
     "metalsmith-layouts": "^1.6.5",
     "minimist": "^1.2.0",
