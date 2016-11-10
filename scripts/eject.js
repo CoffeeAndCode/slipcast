@@ -42,9 +42,9 @@ module.exports = () => {
     delete clientPackage.dependencies.slipcast;
 
     console.log('- updating package.json');
-    writeFileSync(join(process.cwd(), 'package.json'),
-      JSON.stringify(clientPackage, null, 2)
-    );
+    writeFileSync(
+      join(process.cwd(), 'package.json'),
+      JSON.stringify(clientPackage, null, 2));
 
     console.log('Eject completd successfully.');
   });

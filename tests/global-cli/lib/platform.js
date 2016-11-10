@@ -9,15 +9,15 @@ describe('commandExists', () => {
     expect(commandExists('node')).to.be.a('promise');
   });
 
-  it('resolves to true if command is present', () =>
+  it('resolves to true if command is present', () => {
     commandExists('node').then((result) => {
       expect(result).to.eq(true);
-    })
-  );
+    });
+  });
 
-  it('resolves to false if command is not present', () =>
+  it('resolves to false if command is not present', () => {
     commandExists('made-up-command-that-does-not-exist').then((result) => {
       expect(result).to.eq(false);
-    })
-  );
+    });
+  });
 });

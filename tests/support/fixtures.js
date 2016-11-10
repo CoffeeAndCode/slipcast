@@ -26,9 +26,8 @@ function expectedFiles(fixtureName) {
 
 function expectedAndCompressedFiles(fixtureName) {
   const initialFiles = expectedFiles(fixtureName);
-  const compressedFiles = initialFiles.filter(file =>
-    file.match(/\.(css|html|ico|jpg|jpeg|js|json|png|rss|xml)$/i)
-  ).map(file => `${file}.gz`);
+  const compressedFiles = initialFiles.filter(file => file.match(/\.(css|html|ico|jpg|jpeg|js|json|png|rss|xml)$/i))
+    .map(file => `${file}.gz`);
 
   return initialFiles.concat(compressedFiles).sort();
 }
@@ -41,9 +40,7 @@ function expectedFilesForWatch(fixtureName) {
   process.chdir(processDir);
   // eslint-disable-next-line global-require, import/no-dynamic-require
   const testData = require(join(__dirname, '../fixtures', fixtureName, 'test.json'));
-  return testData.expectedFilesForWatch.sort().map(file =>
-    join(__dirname, '../../.tmp', config.output, file)
-  );
+  return testData.expectedFilesForWatch.sort().map(file => join(__dirname, '../../.tmp', config.output, file));
 }
 
 function loadFixture(fixtureName) {
