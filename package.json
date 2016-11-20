@@ -24,7 +24,7 @@
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.6.0",
+    "eslint-plugin-react": "^6.7.1",
     "mocha": "^3.0.2",
     "proxyquire": "^1.7.10",
     "ps-tree": "^1.1.0"
