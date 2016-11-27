@@ -47,8 +47,9 @@ module.exports = (options) => {
       stdio: options.stdio,
     });
 
-    task.on('close', (installCode) => {
-      if (installCode !== 0) {
+    task.on('close', (installExitCode) => {
+      if (installExitCode !== 0) {
+        process.exitCode = installExitCode;
         options.callback(new Error(`\`${command} ${args.join(' ')}' failed`));
         return;
       }

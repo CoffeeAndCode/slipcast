@@ -10,8 +10,8 @@ module.exports.commandExists = function commandExists(command) {
       shell: true,
       stdio: 'ignore',
     })
-      .on('close', (code) => {
-        resolve(code === 0);
+      .on('close', (exitCode) => {
+        resolve(exitCode === 0);
       })
       .on('error', () => '');
   });

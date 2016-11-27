@@ -27,7 +27,8 @@ module.exports = () => {
     console.error(procfilePath);
 
     spawn(require.resolve('foreman/nf'), ['start', '--procfile', procfilePath], { stdio: 'inherit' });
-    process.addListener('exit', () => {
+    process.addListener('exit', (exitCode) => {
+      if (exitCode !== 0) { process.exitCode = exitCode; }
       removeSync(dirname(procfilePath));
     });
     // This listener is required or our `exit` listener will never run.

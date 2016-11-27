@@ -24,12 +24,12 @@ module.exports = () => {
 
     spawn('node', [join(__dirname, './build/css.js')], {
       stdio: 'inherit',
-    });
+    }).on('exit', (exitCode) => { if (exitCode !== 0) { process.exitCode = exitCode; } });
     spawn('node', [join(__dirname, './build/html.js')], {
       stdio: 'inherit',
-    });
+    }).on('exit', (exitCode) => { if (exitCode !== 0) { process.exitCode = exitCode; } });
     spawn('node', [join(__dirname, './build/js.js')], {
       stdio: 'inherit',
-    });
+    }).on('exit', (exitCode) => { if (exitCode !== 0) { process.exitCode = exitCode; } });
   });
 };
