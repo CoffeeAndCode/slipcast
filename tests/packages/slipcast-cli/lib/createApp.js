@@ -1,10 +1,10 @@
 'use strict';
 
-const createApp = require('../../../global-cli/lib/createApp');
+const createApp = require('../../../../packages/slipcast-cli/lib/createApp');
 const { expect } = require('chai');
 const { afterEach, describe, it } = require('mocha');
 const { basename } = require('path');
-const { clean } = require('../../support/fixtures');
+const { clean } = require('../../../support/fixtures');
 const { ensureDirSync } = require('fs-extra');
 
 describe('createApp', () => {

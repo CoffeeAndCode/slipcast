@@ -1,13 +1,13 @@
 'use strict';
 
 const concat = require('concat-stream');
-const pkg = require('../../../global-cli/package.json');
+const pkg = require('../../../../packages/slipcast-cli/package.json');
 const proxyquire = require('proxyquire');
 const { expect } = require('chai');
 const { describe, it } = require('mocha');
 const { PassThrough } = require('stream');
 
-const CLI = proxyquire('../../../global-cli/lib/cli', {
+const CLI = proxyquire('../../../../packages/slipcast-cli/lib/cli', {
   './createApp': (options) => {
     options.callback(null, options);
   },
