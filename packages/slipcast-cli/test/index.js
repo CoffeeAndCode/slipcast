@@ -4,9 +4,9 @@ const { exec } = require('child_process');
 const { expect } = require('chai');
 const { ensureDirSync } = require('fs-extra');
 const { afterEach, beforeEach, describe, it } = require('mocha');
-const pkg = require('../../../packages/slipcast-cli/package.json');
+const pkg = require('../package.json');
 const { join } = require('path');
-const { clean, createTmpDirectory } = require('../../support/fixtures');
+const { clean, createTmpDirectory } = require('./support/fixtures');
 
 describe('slipcast-cli', function testGlobalCLI() {
   const rootDirectory = join(__dirname, '../../../');

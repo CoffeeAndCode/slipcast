@@ -1,6 +1,6 @@
 'use strict';
 
-const { commandExists } = require('../../../../packages/slipcast-cli/lib/platform');
+const { commandExists } = require('../../lib/platform');
 const { expect } = require('chai');
 const { describe, it } = require('mocha');
 

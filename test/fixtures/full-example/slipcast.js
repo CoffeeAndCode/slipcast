@@ -1,14 +1,3 @@
-// Example of registering an example Handlebars helper.
-const handlebars = require('handlebars');
-
-handlebars.registerHelper({
-  capitalize: val => val.toUpperCase(),
-
-  // We need a Handlebars helper to retrieve the data from metalsmith.
-  pageSpecificMessage: options => new handlebars.SafeString(options.data.root.pageSpecificMessage),
-
-});
-
 module.exports = {
   build: {
     html: {
@@ -34,6 +23,15 @@ module.exports = {
     pages: 'app/pages',
     static: 'app/static',
     views: 'app/views',
+  },
+  handlebars: (handlebars) => {
+    handlebars.registerHelper({
+      capitalize: val => val.toUpperCase(),
+
+      // We need a Handlebars helper to retrieve the data from metalsmith.
+      pageSpecificMessage: options =>
+        new handlebars.SafeString(options.data.root.pageSpecificMessage),
+    });
   },
   output: 'dist',
 };

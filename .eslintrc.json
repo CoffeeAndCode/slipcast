@@ -9,6 +9,9 @@
     "sourceType": "script"
   },
   "rules": {
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["packages/**/test/**/*.js"]
+    }],
     "no-console": ["error", { "allow": ["error", "log", "warn"] }],
     "strict": ["error", "safe"]
   }

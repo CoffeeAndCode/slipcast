@@ -20,5 +20,12 @@
   },
   "dependencies": {
     "minimist": "^1.2.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "concat-stream": "^1.5.2",
+    "fs-extra": "^1.0.0",
+    "mocha": "^3.2.0",
+    "proxyquire": "^1.7.10"
   }
 }
