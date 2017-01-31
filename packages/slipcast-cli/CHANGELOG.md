@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - nothing yet
 
 
+## [0.1.3] - 2017-01-31
+### Changed
+- move project files under "packages" folder
+- update js syntax to align with new linting rules
+
+
 ## [0.1.2] - 2016-09-19
 ### Added
 - rethrow exceptions not related to install directory check
@@ -21,5 +27,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.2...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.3...HEAD
+[0.1.3]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.2...slipcast-cli@0.1.3
 [0.1.2]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.1...slipcast-cli@0.1.2
