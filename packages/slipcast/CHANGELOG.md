@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - nothing yet
 
 
+## [0.5.0] - 2017-01-31
+### Changed
+- move project to "packages" folder
+- refactor js code for new linter rules
+- update dependencies
+
+
 ## [0.4.0] - 2016-09-19
 ### Added
 - allow consuming apps to access handlbars
@@ -64,7 +71,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.4.0...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.5.0...HEAD
+[0.5.0]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.4.0...slipcast@0.5.0
 [0.4.0]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.3.1...slipcast@0.4.0
 [0.3.1]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.3.0...slipcast@0.3.1
 [0.3.0]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.2.0...slipcast@0.3.0
