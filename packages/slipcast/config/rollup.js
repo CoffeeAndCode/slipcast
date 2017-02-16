@@ -31,6 +31,7 @@ module.exports = (file) => {
         exclude: 'node_modules/**',
         plugins: [
           require.resolve('babel-plugin-external-helpers'),
+          require.resolve('babel-plugin-transform-object-rest-spread'),
         ],
         presets: [
           [require.resolve('babel-preset-es2015'), {
@@ -47,4 +48,3 @@ module.exports = (file) => {
 
   return rollupConfig;
 };
-
