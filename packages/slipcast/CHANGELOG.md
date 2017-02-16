@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - nothing yet
 
 
+## [0.6.0] - 2017-02-16
+### Added
+- add babel-plugin-transform-object-rest-spread plugin for client side js
+
+
 ## [0.5.0] - 2017-01-31
 ### Changed
 - move project to "packages" folder
@@ -71,7 +76,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.5.0...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.0...HEAD
+[0.6.0]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.4.0...slipcast@0.6.0
 [0.5.0]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.4.0...slipcast@0.5.0
 [0.4.0]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.3.1...slipcast@0.4.0
 [0.3.1]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.3.0...slipcast@0.3.1
