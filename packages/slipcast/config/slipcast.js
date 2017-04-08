@@ -37,6 +37,9 @@ const defaults = {
     views: 'app/views',
   },
   output: 'dist',
+  watch: {
+    browsersync: {},
+  },
 };
 
 module.exports = Object.assign(defaults, config);

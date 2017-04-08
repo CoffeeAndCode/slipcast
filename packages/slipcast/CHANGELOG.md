@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [Unreleased] - Unreleased
-- nothing yet
+### Added
+- slipcast config property watch.browsersync for overriding config values
 
 
 ## [0.6.1] - 2017-02-16

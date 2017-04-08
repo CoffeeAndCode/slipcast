@@ -34,4 +34,9 @@ module.exports = {
     });
   },
   output: 'dist',
+  watch: {
+    browsersync: {
+      reloadDebounce: 2000,
+    },
+  },
 };
