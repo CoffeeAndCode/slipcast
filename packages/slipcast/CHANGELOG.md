@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [Unreleased] - Unreleased
+- nothing yet
+
+
+## [0.6.2] - 2017-04-08
 ### Added
 - slipcast config property watch.browsersync for overriding config values
 
@@ -82,7 +86,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.1...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.2...HEAD
+[0.6.2]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.1...slipcast@0.6.2
 [0.6.1]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.4.0...slipcast@0.6.1
 [0.6.0]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.4.0...slipcast@0.6.0
 [0.5.0]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.4.0...slipcast@0.5.0
