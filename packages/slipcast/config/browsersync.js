@@ -9,5 +9,6 @@ module.exports = Object.assign({
     join(config.folders.static, '**', '*'),
   ],
   open: false,
+  reloadDebounce: 10,
   server: [config.output, config.folders.static],
 }, config.watch.browsersync);
