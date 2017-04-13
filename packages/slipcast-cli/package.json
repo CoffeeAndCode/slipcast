@@ -7,10 +7,7 @@
   },
   "bin": "./index.js",
   "files": [
-    "lib/cli.js",
-    "lib/createApp.js",
-    "lib/help.js",
-    "index.js"
+    "lib/"
   ],
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",
