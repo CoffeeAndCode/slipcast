@@ -26,7 +26,7 @@ module.exports = () => {
     writeFileSync(procfilePath, procfileTemplate());
     console.error(procfilePath);
 
-    spawn(require.resolve('foreman/nf'), ['start', '--procfile', procfilePath], { stdio: 'inherit' });
+    spawn('node', [require.resolve('foreman/nf'), 'start', '--procfile', procfilePath], { stdio: 'inherit' });
     process.addListener('exit', (exitCode) => {
       if (exitCode !== 0) { process.exitCode = exitCode; }
       removeSync(dirname(procfilePath));

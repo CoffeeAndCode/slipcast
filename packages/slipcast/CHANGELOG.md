@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - nothing yet
 
 
+## [0.6.4] - 2017-04-14
+### Added
+- Windows support for slipcast commands
+
+
+### Changed
+- generated project's script calls explicitly use node and path to slipcast
+- change package.json bin definition to object notation
+- change Procfile contents to work on Windows
+- change how Node Foreman is started to work on Windows
+
+
 ## [0.6.3] - 2017-04-13
 ### Added
 - added LICENSE file to project
@@ -94,7 +106,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.3...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.4...HEAD
+[0.6.4]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.3...slipcast@0.6.4
 [0.6.3]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.2...slipcast@0.6.3
 [0.6.2]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.1...slipcast@0.6.2
 [0.6.1]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.4.0...slipcast@0.6.1

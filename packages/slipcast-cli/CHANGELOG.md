@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - nothing yet
 
 
+## [0.1.6] - 2017-04-14
+### Changed
+- change package bin definition to be explicit
+- remove slash from "files" folder listing in package.json
+
+
 ## [0.1.5] - 2017-04-13
 ### Fixed
 - added index.js back to files list; apparently it doesn't add the bin file
@@ -40,7 +46,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.5...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.6...HEAD
+[0.1.6]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.5...slipcast-cli@0.1.6
 [0.1.5]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.4...slipcast-cli@0.1.5
 [0.1.4]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.3...slipcast-cli@0.1.4
 [0.1.3]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.2...slipcast-cli@0.1.3
