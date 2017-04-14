@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - nothing yet
 
 
+## [0.1.4] - 2017-04-13
+### Added
+- added LICENSE file to project
+
+### Fixed
+- fixed package.json which was not including all lib/ files
+
+
 ## [0.1.3] - 2017-01-31
 ### Changed
 - move project files under "packages" folder
@@ -27,6 +35,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.3...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.4...HEAD
+[0.1.4]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.3...slipcast-cli@0.1.4
 [0.1.3]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.2...slipcast-cli@0.1.3
 [0.1.2]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.1...slipcast-cli@0.1.2

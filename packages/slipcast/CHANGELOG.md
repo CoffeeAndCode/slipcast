@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 
 ## [Unreleased] - Unreleased
-- nothing yet
+### Added
+- added LICENSE file to project
 
 
 ## [0.6.2] - 2017-04-08
