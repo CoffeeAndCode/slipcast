@@ -35,11 +35,15 @@ module.exports = (projectDirectory, appName, verbose) => {
         reject(error);
         return;
       }
-      files.push(join(__dirname, '../template', '.gitignore'));
+
       Promise.all(files.map(path => copy(path, join(process.cwd(), basename(path)))))
         .then(resolve).catch(reject);
     });
   });
 
-  return Promise.all([fileCopyPromise, packageWritePromise]);
+  const writeGitIgnorePromise = writeFile('.gitignore', `/dist/
+/node_modules/
+`);
+
+  return Promise.all([fileCopyPromise, packageWritePromise, writeGitIgnorePromise]);
 };
