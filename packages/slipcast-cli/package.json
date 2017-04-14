@@ -1,6 +1,6 @@
 {
   "name": "slipcast-cli",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "The global command interface for Slipcast: the minimal config static website builder you can leave at anytime.",
   "engines": {
     "node": ">=6.0"

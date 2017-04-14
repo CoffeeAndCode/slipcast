@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - nothing yet
 
 
+## [0.1.5] - 2017-04-13
+### Fixed
+- added index.js back to files list; apparently it doesn't add the bin file
+
+
 ## [0.1.4] - 2017-04-13
 ### Added
 - added LICENSE file to project
@@ -35,7 +40,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.4...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.5...HEAD
+[0.1.5]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.4...slipcast-cli@0.1.5
 [0.1.4]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.3...slipcast-cli@0.1.4
 [0.1.3]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.2...slipcast-cli@0.1.3
 [0.1.2]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast-cli@0.1.1...slipcast-cli@0.1.2
