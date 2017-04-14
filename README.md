@@ -36,10 +36,10 @@ a webserver that watches files for changes.
 ```json
 ...
     "scripts": {
-        "build": "slipcast",
-        "compress": "slipcast --compress",
-        "eject": "slipcast --eject",
-        "start": "slipcast --watch"
+        "build": "node node_modules/slipcast/bin/slipcast --build",
+        "compress": "node node_modules/slipcast/bin/slipcast --compress",
+        "eject": "node node_modules/slipcast/bin/slipcast --eject",
+        "start": "node node_modules/slipcast/bin/slipcast --watch"
     }
 ...
 ```

@@ -5,7 +5,9 @@
   "engines": {
     "node": ">=6.0"
   },
-  "bin": "./bin/slipcast.js",
+  "bin": {
+    "slipcast": "./bin/slipcast.js"
+  },
   "author": "Coffee and Code <info@coffeeandcode.com>",
   "license": "ISC",
   "repository": {

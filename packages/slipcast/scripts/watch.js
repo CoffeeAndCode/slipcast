@@ -9,10 +9,10 @@ const { dirname, join } = require('path');
 
 function procfileTemplate() {
   return `# Procfile created by Slipcast
-css: ${require.resolve('nodemon/bin/nodemon')} --ext css,scss --exec "node ${join(__dirname, '../scripts/build/css.js')}" --watch ${config.folders.css}
-html: ${require.resolve('nodemon/bin/nodemon')} --ext hbs --exec "node ${join(__dirname, '../scripts/build/html.js')}" --watch ${config.folders.pages} --watch ${config.folders.views}
-js: ${require.resolve('nodemon/bin/nodemon')} --exec "node ${join(__dirname, '../scripts/build/js.js')}" --watch ${config.folders.javascript}
-server: ${require.resolve('browser-sync/bin/browser-sync')} start --config ${join(__dirname, '../config/browsersync.js')}
+css: node ${require.resolve('nodemon/bin/nodemon')} --ext css,scss --watch ${config.folders.css} ${join(__dirname, '../scripts/build/css.js')}
+html: node ${require.resolve('nodemon/bin/nodemon')} --ext hbs --watch ${config.folders.pages} --watch ${config.folders.views} ${join(__dirname, '../scripts/build/html.js')}
+js: node ${require.resolve('nodemon/bin/nodemon')} --watch ${config.folders.javascript} ${join(__dirname, '../scripts/build/js.js')}
+server: node ${require.resolve('browser-sync/bin/browser-sync')} start --config ${join(__dirname, '../config/browsersync.js')}
 `;
 }
 

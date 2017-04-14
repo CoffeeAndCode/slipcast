@@ -19,10 +19,10 @@ module.exports = (projectDirectory, appName, verbose) => {
   // eslint-disable-next-line global-require, import/no-dynamic-require
   const packageJSON = require(join(process.cwd(), 'package.json'));
   packageJSON.scripts = {
-    build: 'slipcast --build',
-    compress: 'slipcast --compress',
-    eject: 'slipcast --eject',
-    start: 'slipcast --watch',
+    build: 'node node_modules/slipcast/bin/slipcast.js --build',
+    compress: 'node node_modules/slipcast/bin/slipcast.js --compress',
+    eject: 'node node_modules/slipcast/bin/slipcast.js --eject',
+    start: 'node node_modules/slipcast/bin/slipcast.js --watch',
   };
   const packageWritePromise = writeFile('package.json', JSON.stringify(packageJSON, null, 2));
 

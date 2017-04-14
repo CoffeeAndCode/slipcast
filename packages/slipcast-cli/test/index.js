@@ -23,7 +23,7 @@ describe('slipcast-cli', function testGlobalCLI() {
     it('will show an error message if directory already exists', (done) => {
       ensureDirSync(join(rootDirectory, '.tmp/new-project'));
 
-      exec(`${join(rootDirectory, 'packages/slipcast-cli', pkg.bin)} new-project`, {
+      exec(`${join(rootDirectory, 'packages/slipcast-cli', pkg.bin['slipcast-cli'])} new-project`, {
         cwd: join(rootDirectory, '.tmp'),
       }, (error, stdout, stderr) => {
         expect(stderr).to.equal('The directory `new-project` already exists. Aborting.\n');
@@ -33,7 +33,7 @@ describe('slipcast-cli', function testGlobalCLI() {
     });
 
     it('will create the app if the project directory does not exist', (done) => {
-      exec(`${join(rootDirectory, 'packages/slipcast-cli', pkg.bin)} new-project --node_modules ${join(rootDirectory, 'node_modules')}`, {
+      exec(`${join(rootDirectory, 'packages/slipcast-cli', pkg.bin['slipcast-cli'])} new-project --node_modules ${join(rootDirectory, 'node_modules')}`, {
         cwd: join(rootDirectory, '.tmp'),
       }, (error, stdout) => {
         expect(stdout).to.contain('Creating a new Slipcast app in ');
@@ -42,7 +42,7 @@ describe('slipcast-cli', function testGlobalCLI() {
     });
 
     it('will create a package.json file for the app', (done) => {
-      exec(`${join(rootDirectory, 'packages/slipcast-cli', pkg.bin)} new-project --node_modules ${join(rootDirectory, 'node_modules')}`, {
+      exec(`${join(rootDirectory, 'packages/slipcast-cli', pkg.bin['slipcast-cli'])} new-project --node_modules ${join(rootDirectory, 'node_modules')}`, {
         cwd: join(rootDirectory, '.tmp'),
       }, () => {
         // eslint-disable-next-line global-require, import/no-dynamic-require

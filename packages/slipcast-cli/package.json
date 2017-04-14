@@ -5,9 +5,11 @@
   "engines": {
     "node": ">=6.0"
   },
-  "bin": "./index.js",
+  "bin": {
+    "slipcast-cli": "./index.js"
+  },
   "files": [
-    "lib/",
+    "lib",
     "index.js"
   ],
   "author": "Coffee and Code <info@coffeeandcode.com>",

@@ -30,7 +30,7 @@ describe('CLI', function testCLI() {
     });
 
     it('will show an error if slipcast.js cannot be found for build command', (done) => {
-      exec(`${join(__dirname, '../../', pkg.bin)} --build`, {
+      exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --build`, {
         cwd: join(rootDirectory, '.tmp'),
       }, (error, stdout, stderr) => {
         expect(stdout).to.equal('');
@@ -40,7 +40,7 @@ describe('CLI', function testCLI() {
     });
 
     it('will show an error if slipcast.js cannot be found for compile command', (done) => {
-      exec(`${join(__dirname, '../../', pkg.bin)} --compile`, {
+      exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --compile`, {
         cwd: join(rootDirectory, '.tmp'),
       }, (error, stdout, stderr) => {
         expect(stdout).to.equal('');
@@ -50,7 +50,7 @@ describe('CLI', function testCLI() {
     });
 
     it('will show an error if slipcast.js cannot be found for watch command', (done) => {
-      exec(`${join(__dirname, '../../', pkg.bin)} --watch`, {
+      exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --watch`, {
         cwd: join(rootDirectory, '.tmp'),
       }, (error, stdout, stderr) => {
         expect(stdout).to.equal('');
@@ -97,7 +97,7 @@ describe('CLI', function testCLI() {
 
     describe('build', () => {
       it('will build files in the provided destination with --build', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} --build`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --build`, {
           cwd: join(rootDirectory, '.tmp'),
         }, (error, stdout, stderr) => {
           expect(stdout).to.equal('');
@@ -111,7 +111,7 @@ describe('CLI', function testCLI() {
       });
 
       it('will build files in the provided destination with -b', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} -b`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} -b`, {
           cwd: join(rootDirectory, '.tmp'),
         }, (error, stdout, stderr) => {
           expect(stdout).to.equal('');
@@ -125,7 +125,7 @@ describe('CLI', function testCLI() {
       });
 
       it('will use the secondary.hbs layout for deep/index.html', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} -b`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} -b`, {
           cwd: join(rootDirectory, '.tmp'),
         }, () => {
           expect(readFileSync(join(rootDirectory, '.tmp/dist/deep/index.html'), { encoding: 'utf8' })).to.contain('Secondary - ');
@@ -136,13 +136,13 @@ describe('CLI', function testCLI() {
 
     describe('compress', () => {
       it('will created compressed versions of files in output dir with -c', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} --build`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --build`, {
           cwd: join(rootDirectory, '.tmp'),
         }, (error, stdout, stderr) => {
           expect(stdout).to.equal('');
           expect(stderr).to.equal('');
 
-          exec(`${join(__dirname, '../../', pkg.bin)} -c`, {
+          exec(`${join(__dirname, '../../', pkg.bin.slipcast)} -c`, {
             cwd: join(rootDirectory, '.tmp'),
           }, (execError, exexStdout, execStderr) => {
             expect(exexStdout).to.equal('');
@@ -157,13 +157,13 @@ describe('CLI', function testCLI() {
       });
 
       it('will created compressed versions of files in output dir with --compress', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} --build`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --build`, {
           cwd: join(rootDirectory, '.tmp'),
         }, (error, stdout, stderr) => {
           expect(stdout).to.equal('');
           expect(stderr).to.equal('');
 
-          exec(`${join(__dirname, '../../', pkg.bin)} --compress`, {
+          exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --compress`, {
             cwd: join(rootDirectory, '.tmp'),
           }, (execError, exexStdout, execStderr) => {
             expect(exexStdout).to.equal('');
@@ -181,7 +181,7 @@ describe('CLI', function testCLI() {
     describe('watch', () => {
       it('will build and watch files in the provided destination with --watch', (done) => {
         let shuttingDown = false;
-        const task = spawn(join(__dirname, '../../', pkg.bin), ['--watch'], {
+        const task = spawn(join(__dirname, '../../', pkg.bin.slipcast), ['--watch'], {
           cwd: join(rootDirectory, '.tmp'),
         });
 
@@ -218,7 +218,7 @@ describe('CLI', function testCLI() {
 
       it('will build and watch files in the provided destination with -w', (done) => {
         let shuttingDown = false;
-        const task = spawn(join(__dirname, '../../', pkg.bin), ['-w'], {
+        const task = spawn(join(__dirname, '../../', pkg.bin.slipcast), ['-w'], {
           cwd: join(rootDirectory, '.tmp'),
         });
 
@@ -254,7 +254,7 @@ describe('CLI', function testCLI() {
       });
 
       it('will allow access to a static file through the webserver', (done) => {
-        const task = spawn(join(__dirname, '../../', pkg.bin), ['-w'], {
+        const task = spawn(join(__dirname, '../../', pkg.bin.slipcast), ['-w'], {
           cwd: join(rootDirectory, '.tmp'),
         });
 
@@ -298,7 +298,7 @@ describe('CLI', function testCLI() {
 
     describe('build', () => {
       it('will build files in the provided destination with --build', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} --build`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --build`, {
           cwd: join(rootDirectory, '.tmp'),
         }, (error, stdout, stderr) => {
           expect(stdout).to.equal('');
@@ -312,7 +312,7 @@ describe('CLI', function testCLI() {
       });
 
       it('will build files in the provided destination with -b', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} -b`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} -b`, {
           cwd: join(rootDirectory, '.tmp'),
         }, (error, stdout, stderr) => {
           expect(stdout).to.equal('');
@@ -326,7 +326,7 @@ describe('CLI', function testCLI() {
       });
 
       it('will utilize the custom handlebars helper in slipcast.js', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} -b`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} -b`, {
           cwd: join(rootDirectory, '.tmp'),
         }, () => {
           expect(readFileSync(join(rootDirectory, '.tmp/dist/deep/index.html'), { encoding: 'utf8' })).to.contain('GOING DEEP');
@@ -335,7 +335,7 @@ describe('CLI', function testCLI() {
       });
 
       it('will use the secondary.hbs layout for deep/index.html', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} -b`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} -b`, {
           cwd: join(rootDirectory, '.tmp'),
         }, () => {
           expect(readFileSync(join(rootDirectory, '.tmp/dist/deep/index.html'), { encoding: 'utf8' })).to.contain('Secondary - ');
@@ -344,7 +344,7 @@ describe('CLI', function testCLI() {
       });
 
       it('will show custom metalsmith plugin metadata', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} -b`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} -b`, {
           cwd: join(rootDirectory, '.tmp'),
         }, () => {
           expect(readFileSync(join(rootDirectory, '.tmp/dist/deep/index.html'), { encoding: 'utf8' })).to.contain('I am deep/index.hbs');
@@ -355,13 +355,13 @@ describe('CLI', function testCLI() {
 
     describe('compress', () => {
       it('will created compressed versions of files in output dir with -c', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} --build`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --build`, {
           cwd: join(rootDirectory, '.tmp'),
         }, (error, stdout, stderr) => {
           expect(stdout).to.equal('');
           expect(stderr).to.equal('');
 
-          exec(`${join(__dirname, '../../', pkg.bin)} -c`, {
+          exec(`${join(__dirname, '../../', pkg.bin.slipcast)} -c`, {
             cwd: join(rootDirectory, '.tmp'),
           }, (execError, exexStdout, execStderr) => {
             expect(exexStdout).to.equal('');
@@ -376,13 +376,13 @@ describe('CLI', function testCLI() {
       });
 
       it('will created compressed versions of files in output dir with --compress', (done) => {
-        exec(`${join(__dirname, '../../', pkg.bin)} --build`, {
+        exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --build`, {
           cwd: join(rootDirectory, '.tmp'),
         }, (error, stdout, stderr) => {
           expect(stdout).to.equal('');
           expect(stderr).to.equal('');
 
-          exec(`${join(__dirname, '../../', pkg.bin)} --compress`, {
+          exec(`${join(__dirname, '../../', pkg.bin.slipcast)} --compress`, {
             cwd: join(rootDirectory, '.tmp'),
           }, (execError, exexStdout, execStderr) => {
             expect(exexStdout).to.equal('');
@@ -400,7 +400,7 @@ describe('CLI', function testCLI() {
     describe('watch', () => {
       it('will build and watch files in the provided destination with --watch', (done) => {
         let shuttingDown = false;
-        const task = spawn(join(__dirname, '../../', pkg.bin), ['--watch'], {
+        const task = spawn(join(__dirname, '../../', pkg.bin.slipcast), ['--watch'], {
           cwd: join(rootDirectory, '.tmp'),
         });
 
@@ -437,7 +437,7 @@ describe('CLI', function testCLI() {
 
       it('will build and watch files in the provided destination with -w', (done) => {
         let shuttingDown = false;
-        const task = spawn(join(__dirname, '../../', pkg.bin), ['-w'], {
+        const task = spawn(join(__dirname, '../../', pkg.bin.slipcast), ['-w'], {
           cwd: join(rootDirectory, '.tmp'),
         });
 
@@ -473,7 +473,7 @@ describe('CLI', function testCLI() {
       });
 
       it('will allow access to a static file through the webserver', (done) => {
-        const task = spawn(join(__dirname, '../../', pkg.bin), ['-w'], {
+        const task = spawn(join(__dirname, '../../', pkg.bin.slipcast), ['-w'], {
           cwd: join(rootDirectory, '.tmp'),
         });
 
