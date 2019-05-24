@@ -1,6 +1,6 @@
 {
   "name": "slipcast",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "A minimal config static website builder you can leave at anytime.",
   "engines": {
     "node": ">=6.0"
