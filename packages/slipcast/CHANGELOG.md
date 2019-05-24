@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - nothing yet
 
 
+## [0.6.5] - 2019-05-24
+### Changed
+- use latest browser-sync and node-sass library versions
+
+
 ## [0.6.4] - 2017-04-14
 ### Added
 - Windows support for slipcast commands
@@ -106,7 +111,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - initial release
 
 
-[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.4...HEAD
+[Unreleased]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.5...HEAD
+[0.6.5]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.4...slipcast@0.6.5
 [0.6.4]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.3...slipcast@0.6.4
 [0.6.3]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.2...slipcast@0.6.3
 [0.6.2]: https://github.com/CoffeeAndCode/slipcast/compare/slipcast@0.6.1...slipcast@0.6.2

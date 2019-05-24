@@ -12,7 +12,7 @@ function procfileTemplate() {
 css: node ${require.resolve('nodemon/bin/nodemon')} --ext css,scss --watch ${config.folders.css} ${join(__dirname, '../scripts/build/css.js')}
 html: node ${require.resolve('nodemon/bin/nodemon')} --ext hbs --watch ${config.folders.pages} --watch ${config.folders.views} ${join(__dirname, '../scripts/build/html.js')}
 js: node ${require.resolve('nodemon/bin/nodemon')} --watch ${config.folders.javascript} ${join(__dirname, '../scripts/build/js.js')}
-server: node ${require.resolve('browser-sync/bin/browser-sync')} start --config ${join(__dirname, '../config/browsersync.js')}
+server: node ${require.resolve('browser-sync/dist/bin')} start --config ${join(__dirname, '../config/browsersync.js')}
 `;
 }
 
